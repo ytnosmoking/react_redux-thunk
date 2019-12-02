@@ -1,0 +1,135 @@
+.fade-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 500ms;
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 500ms;
+}
+
+
+.slideAnimation-enter {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.slideAnimation-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 1000ms;
+}
+
+.slideAnimation-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slideAnimation-exit-active {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 1000ms;
+}
+
+.zoomAnimation-enter {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.zoomAnimation-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 500ms;
+}
+
+.zoomAnimation-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.zoomAnimation-exit-active {
+  opacity: 0;
+  transform: scale(0);
+  transition: all 500ms;
+}
+
+
+
+.slideInOut-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.slideInOut-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 300ms;
+
+}
+
+.slideInOut-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slideInOut-exit-active {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 300ms;
+}
+
+.slideFromLeft-enter {
+  opacity: .5;
+  transform: translateX(-100%);
+}
+
+.slideFromLeft-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 500ms;
+}
+
+.slideFromLeft-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slideFromLeft-exit-active {
+  opacity: .5;
+  transform: translateX(100%);
+  transition: all 500ms;
+}
+
+.slideBackRight-enter {
+  opacity: .5;
+  transform: translateX(100%);
+}
+
+.slideBackRight-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 2000ms;
+}
+
+.slideBackRight-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slideBackRight-exit-active {
+  opacity: .5;
+  transform: translateX(-100%);
+  transition: all 2000ms;
+}

@@ -1,0 +1,35 @@
+#root {
+  height: 100%;
+}
+
+.trans {
+  transition: all .3s ease;
+}
+
+.ant-layout-header {
+  background-color: #fff;
+}
+
+.header {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #000;
+  position: relative;
+  padding: 0 50px 0 60px;
+}
+
+.header>.switch {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+}
+
+.header>.school-name {
+  font-size: 20px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
