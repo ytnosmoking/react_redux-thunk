@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
-import 'animate.css'
 import './assets/css/index.css'
 import './assets/css/common.less'
 
@@ -12,7 +10,6 @@ import './assets/css/common.less'
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
 
 
 

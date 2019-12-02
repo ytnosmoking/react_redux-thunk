@@ -5,8 +5,8 @@ import { Link, withRouter } from "react-router-dom";
 const { SubMenu } = Menu;
 
 const RouteItem = route => (
-  <Link to={route.pathname}>
-    <Icon type={route.meta.icon} />
+  <Link to={{ pathname: route.pathname, state: { title: route.meta.title } }}>
+    {route.meta.icon ? <Icon type={route.meta.icon} /> : ""}
     <span>{route.meta.title}</span>
   </Link>
 );
@@ -29,7 +29,7 @@ class SiderMenu extends Component {
                 key={route.pathname}
                 title={
                   <span>
-                    <Icon type={route.meta.icon} />
+                    {route.meta.icon ? <Icon type={route.meta.icon} /> : ""}
                     <span>{route.meta.title}</span>
                   </span>
                 }

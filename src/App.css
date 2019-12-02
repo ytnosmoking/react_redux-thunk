@@ -1,12 +1,4 @@
-.sider-hide {
-  min-width: 0 !important;
-  max-width: 0 !important;
-  width: 0 !important;
-  flex: 0% 0 !important;
-  opacity: 0;
-}
-
-.trans {
+/* .trans {
   transition: all .5s ease;
 }
 
@@ -29,4 +21,4 @@
 
 .routeCont {
   height: 100vh;
-}
+} */

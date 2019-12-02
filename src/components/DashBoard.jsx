@@ -4,6 +4,8 @@ import { Layout } from "antd";
 import SiderMenu from "./SiderMenu";
 import BaseHead from "./BaseHead";
 import BaseContent from "./BaseContent";
+import BaseBread from "./BaseBread";
+import SchoolTips from "./BaseTips";
 import { logout } from "store/actions/login";
 import "./dashboard.less";
 const { Header, Sider, Content } = Layout;
@@ -31,14 +33,18 @@ class DashBoard extends Component {
   };
   render() {
     console.log(`--------------this is DashBoard--------------`);
-    console.log(this);
-
     return (
       <Layout className="baseLayout">
-        <Sider collapsed={!this.state.showSide}>
+        <Sider
+          collapsed={!this.state.showSide}
+          style={{
+            overflow: "auto"
+          }}
+          width="220"
+        >
           <SiderMenu></SiderMenu>
         </Sider>
-        <Layout className="trans">
+        <Layout>
           <Header style={{ background: "#fff", padding: 0 }}>
             <BaseHead
               isChecked={this.state.showSide}
@@ -46,8 +52,10 @@ class DashBoard extends Component {
               exitSys={this.exitSys}
             ></BaseHead>
           </Header>
-          <Content>
+          <Content style={{ position: "relative" }}>
+            <BaseBread></BaseBread>
             <BaseContent></BaseContent>
+            <SchoolTips></SchoolTips>
           </Content>
         </Layout>
       </Layout>

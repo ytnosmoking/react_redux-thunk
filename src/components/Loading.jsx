@@ -17,7 +17,6 @@ const loading = () => (
 );
 
 export default name => {
-  console.log(name);
   return Loadable({
     loader: () => import(`views/${name}`),
     loading,

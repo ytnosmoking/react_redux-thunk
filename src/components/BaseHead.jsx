@@ -1,6 +1,5 @@
 // @flow
 import * as React from "react";
-
 import { Button, Switch } from "antd";
 
 const BaseHead = props => {

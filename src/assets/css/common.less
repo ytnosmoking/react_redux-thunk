@@ -143,7 +143,32 @@ table {
 }
 
 
+.content-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding-left: 20px;
 
-// ::-webkit-scrollbar {
-//   display: none;
-// }
+  h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 70%;
+    width: 2px;
+    background-color: #1491cf;
+  }
+}
+
+.content-search {
+  padding-top: 20px;
+  display: flex;
+}
