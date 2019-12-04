@@ -13,37 +13,37 @@ class BaseContent extends Component {
     };
   }
 
-  componentWillUpdate() {}
-
   render() {
     const { location, action } = this.props.history;
     console.log(`%c ${action}`, "color:red;font-size:20px;font-weight:bold");
-    const classMap = {
-      PUSH: "slideFromLeft",
-      POP: "slideBackRight",
-      REPLACE: "slideFromLeft"
-    };
+    // const classMap = {
+    //   PUSH: "slideFromLeft",
+    //   POP: " ",
+    //   REPLACE: "slideFromLeft"
+    // };
     console.log(location);
     return (
-      <TransitionGroup
-        className="baseContent"
-        // childFactory={child =>
-        //   React.cloneElement(child, { classNames: classMap[action] })
-        // }
-      >
-        <CSSTransition timeout={300} key={location.pathname}>
-          <Switch location={location}>
-            {navRoutes.map(route => (
-              <Route
-                path={route.pathname}
-                key={route.pathname}
-                component={route.component}
-              ></Route>
-            ))}
-            <Redirect from="/" to="/home"></Redirect>
-          </Switch>
-        </CSSTransition>
-      </TransitionGroup>
+      // <TransitionGroup
+      //   className="baseContent"
+      //   childFactory={child =>
+      //     React.cloneElement(child, { classNames: classMap[action] })
+      //   }
+      // >
+      //   <CSSTransition timeout={1000} key={location.pathname}>
+      <div className="baseContent">
+        <Switch location={location}>
+          {navRoutes.map(route => (
+            <Route
+              path={route.pathname}
+              key={route.pathname}
+              component={route.component}
+            ></Route>
+          ))}
+          <Redirect from="/" to="/home"></Redirect>
+        </Switch>
+      </div>
+      //   </CSSTransition>
+      // </TransitionGroup>
     );
   }
 }

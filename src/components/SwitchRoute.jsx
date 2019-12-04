@@ -7,7 +7,7 @@ function SwitchRoute({ routes }) {
     <Switch>
       {routes.children.map(route => (
         <Route
-          exact
+          // exact
           path={route.pathname}
           key={route.pathname}
           component={route.component}

@@ -9,10 +9,7 @@ class BaseBread extends Component {
     this.state = {};
   }
   render() {
-    const {
-      state: { title },
-      pathname
-    } = this.props.location;
+    const { state, pathname } = this.props.location;
     const matchArr =
       navRoutes.filter(route => pathname.includes(route.pathname)) || [];
     const matchTitle = (matchArr.length && matchArr[0].meta.title) || "";
@@ -20,7 +17,7 @@ class BaseBread extends Component {
       <div className="baseBread">
         <Breadcrumb>
           {matchTitle ? <Breadcrumb.Item>{matchTitle}</Breadcrumb.Item> : ""}
-          <Breadcrumb.Item>{title}</Breadcrumb.Item>
+          <Breadcrumb.Item>{(state && state.title) || ""}</Breadcrumb.Item>
         </Breadcrumb>
       </div>
     );

@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { ConfigProvider } from 'antd'
 import store from './store'
+import zhCN from 'antd/es/locale/zh_CN';
+import 'animate.css'
 import './assets/css/index.css'
 import './assets/css/common.less'
 
@@ -15,7 +18,9 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Provider store={store}>
   <Router>
-    <App />
+    <ConfigProvider locale={zhCN}>
+      <App />
+    </ConfigProvider>
   </Router>
 </Provider>, document.getElementById('root'));
 
