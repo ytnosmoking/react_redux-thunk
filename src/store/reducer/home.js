@@ -24,6 +24,22 @@ const homeInfo = {
       page: 1,
       total: 1
     }
+  },
+  support: {
+    lists: [],
+    page: {
+      page_size: 10,
+      page: 1,
+      total: 1
+    }
+  },
+  course: {
+    lists: [],
+    page: {
+      page_size: 10,
+      page: 1,
+      total: 1
+    }
   }
 
 }
@@ -43,6 +59,16 @@ const HomeStore = (state = homeInfo, action) => {
   if (type === 'getHomeStudentInfo') {
     return {
       ...state, studentInfo: { ...action.payload }
+    }
+  }
+  if (type === 'getHomeSupport') {
+    return {
+      ...state, support: { ...action.payload }
+    }
+  }
+  if (type === 'getHomeCourse') {
+    return {
+      ...state, course: { ...action.payload }
     }
   }
   return state

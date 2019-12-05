@@ -8,7 +8,7 @@ export const API = {
   Graduate: '/student-graduate-achivements',
   GraduateInfo: '/s-t-explain-achivements',
 
-  studentHead: '/explain-header', // 学生支撑点详情头部数据
+  SupportHead: '/explain-header', // 学生支撑点详情头部数据
   Support: 'major-explain-achivements', //  专业支撑点达成度
 
   InfoRecord: '/total/graduate/id/record',
@@ -32,7 +32,7 @@ export const API = {
   // ---------课程达成度
 
   // 毕业目标设置
-  FinishRequireMent: '/graduate-requirements',
+  requireMents: '/graduate-requirements',
 
   MarkingLine: '/graduate-standards',
   // 专业培养方案
@@ -62,7 +62,7 @@ export const API = {
   terms: '/terms', // 学期
   courses: '/course-types', // 课程类别
   // ---------基本信息管理----------
-  info_teacher: '/teachers',
+  Teacher: '/teachers',
   info_student: '/students',
   info_course: '/courses',
   searchStudent: '/whut-students', // 搜索学生

@@ -5,14 +5,14 @@ import ContentSearch from "component/ContentSearch";
 import BasePagination from "component/BasePagination";
 import { Table } from "antd";
 import { HomeNeedCols } from "utils/cols";
-import { getHomeNeed } from "store/async";
+import { getHomeNeed as getList } from "store/async";
 import { BaseState } from "utils/extends";
 
 @connect(
   state => ({
     ...state.home.need
   }),
-  { getList: getHomeNeed }
+  { getList }
 )
 class HomeNeed extends BaseState {
   componentDidMount() {

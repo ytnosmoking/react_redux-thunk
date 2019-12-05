@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import ContentTitle from "component/ContentTitle";
 import { Table } from "antd";
 import { connect } from "react-redux";

@@ -11,3 +11,11 @@ export const homeStudentInfo = payload => ({
   type: 'getHomeStudentInfo',
   payload
 })
+export const homeSupport = payload => ({
+  type: 'getHomeSupport',
+  payload
+})
+export const homeCourse = payload => ({
+  type: 'getHomeCourse',
+  payload
+})
