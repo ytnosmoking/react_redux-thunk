@@ -1,50 +1,108 @@
-import React from 'react';
+import { Component } from 'react';
 
 
-export const BaseState = class BaseState extends React.Component {
+
+
+
+
+
+
+class State extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       scroll: {
         x: 2000,
         y: 0
       },
-      serach_params: {}
-    };
+      search_params: {}
+    }
   }
-  confirm = params => {
-    console.log(params);
+}
+
+
+class Params extends State {
+
+  fixedParams = (params = {}) => {
+    params = { ...this.state.search_params, ...params }
     Object.keys(params).forEach(key => {
       if (!params[key]) {
         delete params[key];
       }
     });
-    this.setState({ serach_params: params }, () => {
-      this.getList({ ...this.state.serach_params, page: 1 });
+    return params;
+  };
+  resetParams = (params = {}) => {
+    params = { ...this.state.search_params, ...params }
+    Object.keys(params).forEach(key => {
+      params[key] = null;
     });
-  };
-  setParams = params => {
-    this.setState({
-      serach_params: {
-        ...this.state.serach_params,
-        ...params
-      }
-    });
-  };
-  changePage = page => {
-    console.log(page);
-    const params = {
-      ...this.state.serach_params,
-      page
-    };
-    this.getList(params);
-  };
-  changePageSize = (page, page_size) => {
-    const params = {
-      ...this.state.serach_params,
-      page,
-      page_size
-    };
-    this.getList(params);
+    return params;
   };
 }
+
+class Btns extends Params {
+
+  confirm = () => {
+    console.log(this)
+    const params = this.fixedParams();
+    this.getList({ ...params, page: 1 });
+  };
+  reset = () => {
+    this.setState(
+      {
+        search_params: this.resetParams()
+      },
+      () => {
+        this.confirm();
+      }
+    );
+  };
+}
+
+// export const HomeState = class extends Btns {}
+// export const HomeState = class extends Mix(State, Params, Btns) { }
+export const HomeState = class extends Btns { }
+
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     scroll,
+  //     search_params
+  //   }
+  // }
+  // fixedParams
+  // fixedParams = (params = {}) => {
+  //   params = { ...this.state.search_params, ...params }
+  //   Object.keys(params).forEach(key => {
+  //     if (!params[key]) {
+  //       delete params[key];
+  //     }
+  //   });
+  //   return params;
+  // };
+  // resetParams = (params = {}) => {
+  //   params = { ...this.state.search_params, ...params }
+  //   Object.keys(params).forEach(key => {
+  //     params[key] = null;
+  //   });
+  //   return params;
+  // };
+  // confirm = () => {
+  //   console.log(this)
+  //   const params = this.fixedParams();
+  //   this.getList({ ...params, page: 1 });
+  // };
+  // reset = () => {
+  //   this.setState(
+  //     {
+  //       search_params: this.resetParams()
+  //     },
+  //     () => {
+  //       this.confirm();
+  //     }
+  //   );
+  // };
+// }
+
+

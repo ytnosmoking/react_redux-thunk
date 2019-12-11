@@ -1,59 +1,45 @@
 import React from "react";
 import { connect } from "react-redux";
 import ContentTitle from "component/ContentTitle";
-import { Link, Route } from "react-router-dom";
-import SupportInfo from "./SupportInfo";
-
 import BasePagination from "component/BasePagination";
 import { Table, Button } from "antd";
-import { setSupportCols, operation } from "utils/cols";
-import { getSetSupport as getList } from "store/async";
+import { courseManageScoreCols as tableCols } from "utils/cols";
 import { HomeState } from "utils/extends";
+import { getCourseManageScore as getList } from "store/async";
 @connect(
   state => ({
-    ...state.set.support
+    lists: state.course.manageScore.lists.map((list, index) => {
+      const {
+        student: { class: classes, id, name, student_no }
+      } = list;
+      return {
+        key: id,
+        class: classes,
+        name,
+        student_no
+      };
+    }),
+    page: state.course.manageScore.page
   }),
   {
     getList
   }
 )
-class Support extends HomeState {
+class ManageScore extends HomeState {
   constructor(props) {
     super(props);
+    console.log(this);
+    console.log(this.props);
     this.state.loading = true;
-    this.tableCols = [
-      ...setSupportCols,
-      operation({
-        fixed: "right",
-        width: 200,
-        render: (txt, record) => (
-          <div>
-            <Button icon="edit"></Button>
-            <Button icon="delete" className="ml10"></Button>
-            <Button type="primary" className="ml10">
-              <Link
-                to={{
-                  pathname: `${this.props.match.path}/${record.key}`,
-                  state: {
-                    title: "支撑课程",
-                    ...record
-                  }
-                }}
-              >
-                支撑课程
-              </Link>
-            </Button>
-          </div>
-        )
-      })
-    ];
+    this.state.training_plan_id = this.props.location.state.id;
   }
+
   componentDidMount() {
     const dom = this.refs.need;
     const ycal = dom.clientHeight * 0.6;
     this.setState({
       scroll: {
-        x: 1600,
+        x: dom.clientWidth - 40,
         y: ycal
       }
     });
@@ -69,20 +55,33 @@ class Support extends HomeState {
     this.setState({
       loading: true
     });
-    this.props.getList({ page, page_size, ...params });
-  };
 
+    this.props.getList({
+      page,
+      page_size,
+      ...params,
+      training_plan_id: this.state.training_plan_id
+    });
+  };
   render() {
     const { state } = this.props.location;
     const { scroll, search_params, loading } = this.state;
     const { lists, page } = this.props;
+
     return (
-      <div ref="need">
+      <div ref="need" className="secondDiv animated slideInRight">
         <ContentTitle
           title={(state && state.title) || ""}
-          btn={<Button type="primary">新增</Button>}
+          txt={<div style={{ fontSize: 20 }}>{state.h3}</div>}
+          btn={
+            <div>
+              <Button type="primary">批量导入</Button>
+              <Button type="primary" className="ml20">
+                新增
+              </Button>
+            </div>
+          }
         />
-
         <Table
           style={{
             marginTop: 20,
@@ -95,20 +94,16 @@ class Support extends HomeState {
           size="middle"
           pagination={false}
           bordered
-          columns={this.tableCols}
+          columns={tableCols}
         ></Table>
         <BasePagination
           page={page}
           params={search_params}
           getList={this.getList}
         />
-        <Route
-          path={`${this.props.match.path}/:id`}
-          component={SupportInfo}
-        ></Route>
       </div>
     );
   }
 }
 
-export default Support;
+export default ManageScore;

@@ -1,14 +1,17 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
+
 import ContentTitle from "component/ContentTitle";
-import ContentSearch from "component/ContentSearch";
+import YearPicker from "component/Picker";
+import BaseSelect from "component/BaseSelect";
+
 import BasePagination from "component/BasePagination";
 import StudentInfo from "./StudentInfo";
-import { Table, Button } from "antd";
+import { Table, Button, message, Input } from "antd";
 import { HomeStudentCols, operation } from "utils/cols";
-import { getHomeStudent as getList } from "store/async";
-import { BaseState } from "utils/extends";
+import { getHomeStudent as getList, getMajors } from "store/async";
+import { HomeState as BaseState } from "utils/extends";
 
 const tableCols = [
   ...HomeStudentCols,
@@ -45,9 +48,10 @@ const tableCols = [
 
 @connect(
   state => ({
+    majors: state.select.majors,
     ...state.home.student
   }),
-  { getList }
+  { getList, getMajors }
 )
 class Student extends BaseState {
   constructor(props) {
@@ -78,22 +82,87 @@ class Student extends BaseState {
     });
     this.props.getList({ page, page_size, ...params });
   };
+  setParams = (key, value) => {
+    this.setState({
+      search_params: {
+        ...this.state.search_params,
+        [key]: value
+      }
+    });
+  };
+
+  getMoreList = (key, type) => {
+    const {
+      [key]: { lists, page: pageInfo }
+    } = this.props;
+    if (lists.length >= pageInfo.total) {
+      return message.info("没有数据了");
+    }
+    const page = (pageInfo.page || 0) + 1;
+    this.props[type]({ page });
+  };
+
   render() {
     console.log(this);
     const { state } = this.props.location;
-    const { scroll, serach_params, loading } = this.state;
-    const { lists, page } = this.props;
+    const { scroll, search_params, loading } = this.state;
+    const { lists, page, majors } = this.props;
     return (
       <div ref="need">
         <ContentTitle title={(state && state.title) || ""} />
-        <ContentSearch
+        <div className="content-search">
+          <YearPicker
+            setParams={this.setParams}
+            config={{ key: "enter_year", value: search_params.enter_year }}
+            mode="year"
+            format="YYYY"
+            placeholder="请选择年份"
+          />
+          <BaseSelect
+            setParams={this.setParams}
+            config={{
+              key: "major_id",
+              value: search_params.major_id,
+              listKey: "majors",
+              listType: "getMajors"
+            }}
+            options={majors.lists}
+            getMore={this.getMoreList}
+          />
+          {/* name */}
+          <div className="ml20 w160">
+            <Input
+              allowClear
+              placeholder="姓名"
+              value={search_params.name}
+              onChange={e => this.setParams("name", e.target.value)}
+            />
+          </div>
+          {/* student_no */}
+          <div className="ml20 w160">
+            <Input
+              allowClear
+              placeholder="学号"
+              value={search_params.student_no}
+              onChange={e => this.setParams("student_no", e.target.value)}
+            />
+          </div>
+
+          <Button className="ml20" type="primary" onClick={this.confirm}>
+            确认
+          </Button>
+          <Button className="ml20" type="primary" onClick={this.reset}>
+            重置
+          </Button>
+        </div>
+        {/* <ContentSearch
           confirm={this.confirm}
           hasYear
           hasMajor
           hasName
           hasNo
           setParams={this.setParams}
-        />
+        /> */}
         <Table
           style={{
             backgroundColor: "#fff",
@@ -110,18 +179,15 @@ class Student extends BaseState {
         ></Table>
         <BasePagination
           page={page}
-          params={serach_params}
+          params={search_params}
           getList={this.getList}
         />
-        {/* <Transition>
-          <CSSTransition in={true} timeout={2000} classNames="slideBackRight"> */}
+
         <Route
           path={`${this.props.match.path}/:id`}
           component={StudentInfo}
           classlist="123"
         ></Route>
-        {/* </CSSTransition>
-        </Transition> */}
       </div>
     );
   }

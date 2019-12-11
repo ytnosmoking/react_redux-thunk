@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+// import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { navRoutes } from "../router/index";
 
 @withRouter

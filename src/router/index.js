@@ -64,7 +64,7 @@ export const CoursesRoute = {
     {
       pathname: '/course/manage',
       meta: {
-        title: '课程达成度',
+        title: '课程管理',
         icon: 'dingding'
       },
       component: Loadable('Course/Manage'),

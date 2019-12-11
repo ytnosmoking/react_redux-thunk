@@ -19,7 +19,6 @@ class SiderMenu extends Component {
   }
   render() {
     const { pathname } = this.props.location;
-    console.log(this.props);
     return (
       <Menu mode="inline" theme="dark" selectedKeys={[pathname]}>
         {navRoutes.map(route => {

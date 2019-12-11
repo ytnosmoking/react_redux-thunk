@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { HomeStudentInfoCols as tableCols } from "utils/cols";
 import { getHomeStudentInfo as getList } from "store/async";
 import BasePagination from "component/BasePagination";
-import { BaseState } from "utils/extends";
+import { HomeState } from "utils/extends";
 
 @connect(
   state => ({
@@ -13,9 +13,10 @@ import { BaseState } from "utils/extends";
   }),
   { getList }
 )
-class StudentInfo extends BaseState {
+class StudentInfo extends HomeState {
   constructor(props) {
     super(props);
+
     this.state.loading = true;
   }
   componentDidMount() {
@@ -54,20 +55,7 @@ class StudentInfo extends BaseState {
     const { lists, page } = this.props;
     console.log(this.props);
     return (
-      <div
-        ref="need"
-        style={{
-          position: "absolute",
-          height: "100%",
-          width: "100%",
-          left: 0,
-          top: 0,
-          backgroundColor: "#fff",
-          padding: "40px 20px",
-          zIndex: 1
-        }}
-        className="animated slideInRight"
-      >
+      <div ref="need" className="secondDiv animated slideInRight">
         <ContentTitle
           title={(state && state.title) || ""}
           txt={<div style={{ fontSize: 20 }}>{name + "-" + student_no}</div>}

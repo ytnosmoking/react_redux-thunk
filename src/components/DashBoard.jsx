@@ -6,14 +6,15 @@ import BaseHead from "./BaseHead";
 import BaseContent from "./BaseContent";
 import BaseBread from "./BaseBread";
 import SchoolTips from "./BaseTips";
-import { logout } from "store/actions/login";
+import { createAction } from "utils/tools";
+import * as ACTION from "../store/async/action_type";
 import "./dashboard.less";
 const { Header, Sider, Content } = Layout;
 @connect(
   state => ({
     historyRoutes: state.history
   }),
-  { logout }
+  { logout: createAction(ACTION.LOGOUT) }
 )
 class DashBoard extends Component {
   constructor(props) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Progress } from 'antd'
 
+
 const fixed = true
 const width = 200
 const defaultCol = (title = 'title', dataIndex = 'dataIndex', key = dataIndex, config = {}) => ({
@@ -88,12 +89,34 @@ const score = (config = {}) => ({
   ...defaultCol('学分', 'score'),
   ...config
 })
-
+const set = (config = {}) => ({
+  ...defaultCol('考核设置', 'set'),
+  ...config
+})
+const u_status = (config = {}) => ({
+  ...defaultCol('上传状态', 'u_status'),
+  ...config
+})
 
 export const operation = (config = {}) => ({
   ...defaultCol('操作', 'operation'),
   ...config
 })
+export const number = (config = {}) => ({
+  ...defaultCol('毕业要求', 'number'),
+  ...config
+})
+
+export const content = (config = {}) => ({
+  ...defaultCol('具体毕业要求', 'content'),
+  ...config
+})
+export const weight = (config = {}) => ({
+  ...defaultCol('权重', 'weight'),
+  ...config
+})
+
+
 
 // 达成度统计-毕业要求
 export const HomeNeedCols = [
@@ -197,4 +220,166 @@ export const HomeCourseCols = [
       ))
     )
   })
+]
+
+// 课程达成度 
+export const CourseManageCols = [
+  terms({
+    render: (txt, record) => (
+      <span>{record.term && record.term.title}</span>
+    )
+  }),
+  enter_year(),
+  major({
+    render: (txt, record) => (
+      <span>{record.major && record.major.title}</span>
+    )
+  }),
+  course_no({
+    render: (txt, record) => (
+      <span>{record.course && record.course.course_no}</span>
+    )
+  }),
+  course_no({
+    title: '课程', dataIndex: 'course', key: 'course',
+    render: (txt, record) => (
+      <span>{record.course && record.course.title}</span>
+    )
+  }),
+
+  teacher({
+    title: '教师',
+    render: (txt, record) => (
+      <span>{record.teachers && record.teachers.join(',')}</span>
+    )
+  }),
+  set({
+    render: (txt, record) => (
+      <span style={{ color: record.is_check_way_set ? '#1890ff' : '' }}>{record.is_check_way_set ? '已' : '未'}设置</span>
+    )
+  }),
+  u_status(
+    {
+      render: (txt, record) => (
+        <span style={{ color: record.is_exam_result_set ? '#1890ff' : '' }}>{record.is_exam_result_set ? '已' : '未'}上传</span>
+      )
+    }
+  ),
+
+]
+export const courseManageScoreCols = [
+  student_no(),
+  name({ width: 200 }),
+  classes()
+]
+
+export const courseTargetCols = [
+  terms(),
+  enter_year(),
+  major(),
+  course_no(),
+  courses({ title: '课程', dataIndex: 'course', key: 'course' }),
+  teacher(),
+  score({ title: '课程目标平均值' }),
+]
+
+export const setNeedCols = [
+  number(),
+  content({ width: 600 })
+]
+
+export const setLineCols = [
+  enter_year(),
+  department(),
+  major(),
+  score({
+    title: '达成度最低指标',
+  })
+]
+
+export const setProjectCols = [
+  enter_year(),
+  major({
+    width: 600,
+    render: (txt, record) => (
+      <span>{txt.title}</span>
+    )
+  }),
+]
+export const setProjectInfoCols = [
+  course_type(),
+  terms(),
+  course_no(),
+  name({ title: '课程名称' }),
+  score()
+]
+
+export const setSupportCols = [
+  number(),
+  enter_year(),
+  major(),
+  support(),
+  content(),
+  weight()
+]
+
+export const setSupportInfoCols = [
+  course_no(),
+  courses({ title: '支撑课程' }),
+  score(),
+  weight()
+]
+
+export const setOutLineCols = [
+  enter_year(),
+  major(),
+  course_no(),
+  courses(),
+  score(),
+  number({ title: '课程目标数' })
+]
+
+export const setOutLineInfoCols = [
+  number({ title: '序号' }),
+  score({ title: '课程目标', dataIndex: 'target', key: 'target' }),
+  support(),
+  weight()
+]
+
+export const setTable = [
+  enter_year(),
+  major({
+    render: (txt) => (
+      <div>{txt.title}</div>
+    )
+  })
+]
+
+export const setShare = [
+  terms(),
+  enter_year(),
+  major(),
+  course_no(),
+  courses(),
+  teacher()
+]
+
+export const setManage = [
+  name({ title: '课程组名称' }),
+  leader(),
+  courses({
+    render: (txt) => (
+      txt.map((item, index) => (
+        <div key={index}>{item}</div>
+      ))
+    )
+  }),
+  department(),
+  teacher({
+    render: (txt) => (
+      txt.map((item, index) => (
+        <div key={index}>{item}</div>
+      ))
+    )
+  }),
 ]

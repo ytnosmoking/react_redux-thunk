@@ -12,7 +12,6 @@ const golobalState = {
 
 const globalReducer = (state = golobalState, action) => {
   const { type } = action
-  console.log(action)
   if (type === 'login') {
     const { isLogin, info } = action.payload
     return { ...state, isLogin, info }

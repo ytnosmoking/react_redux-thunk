@@ -1,21 +1,22 @@
 
+import { message } from 'antd'
 import { getData, postData } from 'utils/ajax'
 import { API } from 'utils/api'
-import { setItem } from 'utils/tools'
-import { login } from '../actions/login'
-import { majors, requireMents, supportHead, departments, teachers } from '../actions/select'
-import { homeNeed, homeStudent, homeStudentInfo, homeSupport, homeCourse } from '../actions/home'
+import { setItem, createAction } from 'utils/tools'
+import * as ACTION from './action_type'
+// 所有设置的action 都可以不要了 利用createAction 动态生成action
 
 export const Login = (params) => {
   return async (dispatch) => {
-    const p = await postData(API.Login, params)
+    const p = await postData(API.LOGIN, params)
     const { data: { token }, errcode } = p
     if (errcode === 0) {
       setItem('isLogin', token)
     }
-    const userInfo = await getData(API.userInfo)
+    const userInfo = await getData(API.USER_INFO)
     const { data: info } = userInfo
-    dispatch(login({ isLogin: token, info }))
+    const payload = { isLogin: token, info }
+    dispatch(createAction(ACTION.LOGIN)(payload))
     return p
   }
 }
@@ -23,8 +24,7 @@ export const Login = (params) => {
 // 专业
 export const getMajors = (params = { page_size: 10, page: 1 }) => {
   return async (dispatch) => {
-    // 
-    const p = await getData(API.majors, params)
+    const p = await getData(API.MAJOR, params)
     console.log(p)
     const { errcode, data: {
       current_page,
@@ -35,47 +35,73 @@ export const getMajors = (params = { page_size: 10, page: 1 }) => {
     if (errcode !== 0) {
       return console.log(p.errmsg)
     }
-    dispatch(majors({
+    const payload = {
       lists: lists.map(list => ({ value: list.id, label: list.title })),
       page: {
         page_size: per_page * 1,
         page: current_page,
         total
       }
-    }))
+    }
+    dispatch(createAction(ACTION.MAJOR)(payload))
   }
 }
+// 学期
+export const getTerms = (params = { page_size: 10, page: 1 }) => {
+  return async (dispatch) => {
+    const p = await getData(API.TERMS, params)
+    console.log(p)
+    const { errcode, data: {
+      current_page,
+      per_page,
+      total,
+      data: lists
+    } } = p
+    if (errcode !== 0) {
+      return console.log(p.errmsg)
+    }
+    const payload = {
+      lists: lists.map(list => ({ value: list.id, label: list.title })),
+      page: {
+        page_size: per_page * 1,
+        page: current_page,
+        total
+      }
+    }
+    dispatch(createAction(ACTION.TERMS)(payload))
+  }
+}
+
 // 要求 getRequireMents
 export const getRequireMents = (params = { page_size: 10, page: 1 }) => {
   return async (dispatch) => {
     // 
-    const p = await getData(API.requireMents, params)
+    const p = await getData(API.REQUIRE_MENTS, params)
     console.log(p)
     const { errcode, data: lists } = p
     if (errcode !== 0) {
       return console.log(p.errmsg)
     }
-    dispatch(requireMents(lists))
+    dispatch(createAction(ACTION.REQUIRE_MENTS)(lists))
   }
 }
 // 支撑点
 export const getSupport = (params) => {
   return async (dispatch) => {
     // 
-    const p = await getData(API.SupportHead, params)
+    const p = await getData(API.SUPPORT_HEAD, params)
     console.log(p)
     const { errcode, data: lists } = p
     if (errcode !== 0) {
       return console.log(p.errmsg)
     }
-    dispatch(supportHead(lists))
+    dispatch(createAction(ACTION.SUPPORT_HEAD)(lists))
   }
 }
 // 系
 export const getDepartment = (params = { page_size: 10, page: 1 }) => {
   return async (dispatch) => {
-    // 
-    const p = await getData(API.departments, params)
+    const p = await getData(API.DEPARTMENTS, params)
     console.log(p)
     const { errcode, data: {
       current_page,
@@ -86,22 +112,21 @@ export const getDepartment = (params = { page_size: 10, page: 1 }) => {
     if (errcode !== 0) {
       return console.log(p.errmsg)
     }
-    dispatch(departments({
+    const payload = {
       lists: lists.map(list => ({ value: list.id, label: list.title })),
       page: {
         page_size: per_page * 1,
         page: current_page,
         total
       }
-    }))
+    }
+    dispatch(createAction(ACTION.DEPARTMENTS)(payload))
   }
 }
 // 课程组长 老师
 export const getTeacher = (params = { page_size: 10, page: 1 }) => {
   return async (dispatch) => {
-    // 
-    const p = await getData(API.Teacher, params)
-    console.log(p)
+    const p = await getData(API.TEACHERS, params)
     const { errcode, data: {
       current_page,
       per_page,
@@ -111,23 +136,24 @@ export const getTeacher = (params = { page_size: 10, page: 1 }) => {
     if (errcode !== 0) {
       return console.log(p.errmsg)
     }
-    dispatch(teachers({
+    const payload = {
       lists: lists.map(list => ({ value: list.id, label: list.name })),
       page: {
         page_size: per_page * 1,
         page: current_page,
         total
       }
-    }))
+    }
+    dispatch(createAction(ACTION.TEACHERS)(payload))
   }
 }
 
 
-
+// Home
 export const getHomeNeed = (params) => {
   console.log(params)
   return async (dispatch) => {
-    const p = await getData(API.HomeNeed, params)
+    const p = await getData(API.HOME_NEED, params)
     const { errcode, data: {
       current_page,
       per_page,
@@ -137,21 +163,22 @@ export const getHomeNeed = (params) => {
     if (errcode !== 0) {
       return console.log(p.errmsg)
     }
-    dispatch(homeNeed({
+    const payload = {
       lists: lists.map(item => ({ ...item, key: item.id })),
       page: {
         page_size: per_page * 1,
         page: current_page,
         total
       }
-    }))
+    }
+    dispatch(createAction(ACTION.HOME_NEED)(payload))
   }
 }
 
 export const getHomeStudent = (params) => {
   console.log(params)
   return async (dispatch) => {
-    const p = await getData(API.Graduate, params)
+    const p = await getData(API.HOME_STUDENT, params)
     const { errcode, data: {
       current_page,
       per_page,
@@ -161,7 +188,7 @@ export const getHomeStudent = (params) => {
     if (errcode !== 0) {
       return console.log(p.errmsg)
     }
-    dispatch(homeStudent({
+    const payload = {
       lists: lists.map(item => {
         const { student } = item;
         const { student_no, name, class: classes } = student
@@ -181,14 +208,15 @@ export const getHomeStudent = (params) => {
         page: current_page,
         total
       }
-    }))
+    }
+    dispatch(createAction(ACTION.HOME_STUDENT)(payload))
   }
 }
 
 export const getHomeStudentInfo = (params) => {
   console.log(params)
   return async (dispatch) => {
-    const p = await getData(API.GraduateInfo, params)
+    const p = await getData(API.HOME_STUDENT_INFO, params)
     const { errcode, data: {
       current_page,
       per_page,
@@ -198,7 +226,7 @@ export const getHomeStudentInfo = (params) => {
     if (errcode !== 0) {
       return console.log(p.errmsg)
     }
-    dispatch(homeStudentInfo({
+    const payload = {
       lists: lists.map(item => {
         const { course, id } = item;
         const { course_no, course_type, title, credit } = course
@@ -216,14 +244,15 @@ export const getHomeStudentInfo = (params) => {
         page: current_page,
         total
       }
-    }))
+    }
+    dispatch(createAction(ACTION.HOME_STUDENT_INFO)(payload))
   }
 }
 
 export const getHomeSupport = (params) => {
   console.log(params)
   return async (dispatch) => {
-    const p = await getData(API.Support, params)
+    const p = await getData(API.HOME_SUPPORT, params)
     const { errcode, data: {
       current_page,
       per_page,
@@ -233,7 +262,7 @@ export const getHomeSupport = (params) => {
     if (errcode !== 0) {
       return console.log(p.errmsg)
     }
-    dispatch(homeSupport({
+    const payload = {
       lists: lists.map(item => {
         const { enter_year, achivement, major, graduate_explain, graduate_requirement, id } = item;
         return {
@@ -249,14 +278,15 @@ export const getHomeSupport = (params) => {
         page: current_page,
         total
       }
-    }))
+    }
+    dispatch(createAction(ACTION.HOME_SUPPORT)(payload))
   }
 }
 
 export const getHomeCourse = (params) => {
   console.log(params)
   return async (dispatch) => {
-    const p = await getData(API.Course, params)
+    const p = await getData(API.HOME_COURSE, params)
     const { errcode, data: {
       current_page,
       per_page,
@@ -266,7 +296,7 @@ export const getHomeCourse = (params) => {
     if (errcode !== 0) {
       return console.log(p.errmsg)
     }
-    dispatch(homeCourse({
+    const payload = {
       lists: lists.map(item => {
         const { id, title, teacher: leader, department, training_plan_achivements } = item;
         const terms = []
@@ -300,7 +330,466 @@ export const getHomeCourse = (params) => {
         page: current_page,
         total
       }
-    }))
+    }
+    dispatch(createAction(ACTION.HOME_COURSE)(payload))
   }
 }
 
+
+// Course
+export const getCourseManage = params => {
+  console.log(params)
+  return async (dispatch) => {
+    try {
+      const p = await getData(API.COURSE_MANAGE, params)
+      const { errcode, data: {
+        current_page,
+        per_page,
+        total,
+        data
+      } } = p
+      if (errcode !== 0) {
+        throw new Error(p.message)
+      }
+      const payload = {
+        lists: data.map(list => ({ key: list.id, ...list })),
+        page: {
+          page_size: per_page * 1,
+          page: current_page,
+          total
+        }
+      }
+      dispatch(createAction(ACTION.COURSE_MANAGE)(payload))
+    } catch (error) {
+      message.error(error)
+    }
+  }
+}
+
+export const getCourseManageScore = params => {
+  return async (dispatch) => {
+    try {
+      const p = await getData(API.COURSE_MANAGE_SCORE, params)
+      const { errcode, data: {
+        current_page,
+        per_page,
+        total,
+        data
+      } } = p
+      if (errcode !== 0) {
+        throw new Error(p.message)
+      }
+      const payload = {
+        lists: data.map(list => ({ key: list.id, ...list })),
+        page: {
+          page_size: per_page * 1,
+          page: current_page,
+          total
+        }
+      }
+      dispatch(createAction(ACTION.COURSE_MANAGE_SCORE)(payload))
+    } catch (error) {
+      message.error(error)
+    }
+  }
+}
+
+export const getCourseTarget = params => {
+  return async (dispatch) => {
+    try {
+      const p = await getData(API.COURSE_TARGET, params)
+      const { errcode, data: {
+        current_page,
+        per_page,
+        total,
+        data
+      } } = p
+      if (errcode !== 0) {
+        throw new Error(p.message)
+      }
+      const payload = {
+        lists: data.map(list => ({ key: list.id, ...list })),
+        page: {
+          page_size: per_page * 1,
+          page: current_page,
+          total
+        }
+      }
+      dispatch(createAction(ACTION.COURSE_TARGET)(payload))
+    } catch (error) {
+      message.error(error)
+    }
+  }
+}
+
+// Set
+export const getSetLine = params => {
+  return async (dispatch) => {
+    try {
+      const p = await getData(API.SET_LINE, params)
+      const { errcode, data: {
+        current_page,
+        per_page,
+        total,
+        data: lists
+      } } = p
+      if (errcode !== 0) {
+        throw new Error(p.message)
+      }
+      const payload = {
+        lists: lists.map(list => {
+          const {
+            id, enter_year,
+            major,
+            min_achivement
+          } = list
+          return {
+            id,
+            enter_year,
+            major: major.title,
+            department: major.department.title,
+            score: min_achivement
+          }
+        }),
+        page: {
+          page_size: per_page * 1,
+          page: current_page,
+          total
+        }
+      }
+
+      dispatch(createAction(ACTION.SET_LINE)(payload))
+    } catch (error) {
+      message.error(error)
+    }
+  }
+}
+
+export const getSetProject = params => {
+  console.log(params)
+  return async (dispatch) => {
+    try {
+      const p = await getData(API.SET_PROJECT, params)
+      const { errcode, data: {
+        current_page,
+        per_page,
+        total,
+        data: lists
+      } } = p
+      if (errcode !== 0) {
+        throw new Error(p.message)
+      }
+      const payload = {
+        lists,
+        page: {
+          page_size: per_page * 1,
+          page: current_page,
+          total
+        }
+      }
+      dispatch(createAction(ACTION.SET_PROJECT)(payload))
+    } catch (error) {
+      message.error(error)
+    }
+  }
+}
+
+export const getSetProjectInfo = params => {
+  console.log(params)
+  return async (dispatch) => {
+    try {
+      const p = await getData(API.SET_PROJECT_INFO, params)
+      const { errcode, data: {
+        current_page,
+        per_page,
+        total,
+        data: lists
+      } } = p
+      if (errcode !== 0) {
+        throw new Error(p.message)
+      }
+      const payload = {
+        lists: lists.map(list => {
+          const { course, id, term } = list
+          return {
+            key: id,
+            course_type: course.course_type.title,
+            terms: term.title,
+            course_no: course.course_no,
+            name: course.title,
+            score: course.credit
+          }
+        }),
+        page: {
+          page_size: per_page * 1,
+          page: current_page,
+          total
+        }
+      }
+      dispatch(createAction(ACTION.SET_PROJECT_INFO)(payload))
+    } catch (error) {
+      message.error(error)
+    }
+  }
+}
+
+export const getSetSupport = params => {
+  console.log(params)
+  return async (dispatch) => {
+    try {
+      const p = await getData(API.SET_SUPPORT, params)
+      const { errcode, data: {
+        current_page,
+        per_page,
+        total,
+        data: lists
+      } } = p
+      if (errcode !== 0) {
+        throw new Error(p.message)
+      }
+      const payload = {
+        lists: lists.map(list => {
+          const { number, enter_year, major, graduate_requirement, title: content, weight, id } = list
+          return {
+            key: id,
+            number: graduate_requirement.number,
+            enter_year,
+            major: major.title,
+            support: graduate_requirement.number + '.' + number,
+            content,
+            weight
+          }
+        }),
+        page: {
+          page_size: per_page * 1,
+          page: current_page,
+          total
+        }
+      }
+      dispatch(createAction(ACTION.SET_SUPPORT)(payload))
+    } catch (error) {
+      message.error(error)
+    }
+  }
+}
+export const getSetSupportInfo = params => {
+  console.log(params)
+  return async (dispatch) => {
+    try {
+      const p = await getData(API.SET_SUPPORT_INFO, params)
+      const { errcode, data: {
+        current_page,
+        per_page,
+        total,
+        data: lists
+      } } = p
+      if (errcode !== 0) {
+        throw new Error(p.message)
+      }
+      const payload = {
+        lists: lists.map(list => {
+          const { training_plan, weight, id } = list
+          const { course: { course_no, title: courses, credit: score } } = training_plan
+          return {
+            key: id,
+            course_no,
+            courses,
+            score,
+            weight
+          }
+        }),
+        page: {
+          page_size: per_page * 1,
+          page: current_page,
+          total
+        }
+      }
+      dispatch(createAction(ACTION.SET_SUPPORT_INFO)(payload))
+    } catch (error) {
+      message.error(error)
+    }
+  }
+}
+export const getSetOutLine = params => {
+  console.log(params)
+  return async (dispatch) => {
+    try {
+      const p = await getData(API.SET_PROJECT_INFO, params)
+      const { errcode, data: {
+        current_page,
+        per_page,
+        total,
+        data: lists
+      } } = p
+      if (errcode !== 0) {
+        throw new Error(p.message)
+      }
+      const payload = {
+        lists: lists.map(list => {
+          const { course, enter_year, major, target_count: number, id, outline_id } = list
+
+          return {
+            id,
+            enter_year,
+            major: major.title,
+            course_no: course.course_no,
+            courses: course.title,
+            score: course.credit,
+            number,
+            outline_id
+          }
+        }),
+        page: {
+          page_size: per_page * 1,
+          page: current_page,
+          total
+        }
+      }
+      dispatch(createAction(ACTION.SET_OUTLINE)(payload))
+    } catch (error) {
+      message.error(error)
+    }
+  }
+}
+
+export const getSetOutLineInfo = params => {
+  return async (dispatch) => {
+    try {
+      const p = await getData(API.SET_OUTLINE_INFO, params)
+      const { errcode, data: lists
+      } = p
+      if (errcode !== 0) {
+        throw new Error(p.message)
+      }
+      const payload = lists.map(list => {
+        const { id, number, title: target, graduate_explain, training_plan, weight } = list
+        return {
+          id,
+          number,
+          target,
+          support: graduate_explain.number + '.' + graduate_explain.graduate_requirement.number,
+          weight,
+          training_plan
+        }
+      })
+      dispatch(createAction(ACTION.SET_OUTLINE_INFO)(payload))
+    } catch (error) {
+      message.error(error)
+    }
+  }
+}
+
+
+export const getSetTable = params => {
+  return async (dispatch) => {
+    try {
+      const p = await getData(API.SET_PROJECT, params)
+      const { errcode, data: {
+        current_page,
+        per_page,
+        total,
+        data: lists
+      }
+      } = p
+      if (errcode !== 0) {
+        throw new Error(p.message)
+      }
+      const payload = {
+        lists,
+        page: {
+          page_size: per_page * 1,
+          page: current_page,
+          total
+        }
+      }
+      dispatch(createAction(ACTION.SET_TABLE)(payload))
+    } catch (error) {
+      message.error(error)
+    }
+  }
+}
+
+export const getSetShare = params => {
+  return async (dispatch) => {
+    try {
+      const p = await getData(API.SET_PROJECT_INFO, params)
+      const { errcode, data: {
+        current_page,
+        per_page,
+        total,
+        data: lists
+      }
+      } = p
+      if (errcode !== 0) {
+        throw new Error(p.message)
+      }
+      const payload = {
+        lists: lists.map(list => {
+          const { term, id, enter_year, major, course: { course_no, title: courses }, teachers } = list
+          return {
+            id,
+            terms: term.title,
+            enter_year,
+            major: major.title,
+            course_no,
+            courses,
+            teacher: teachers.join(',')
+          }
+        }),
+        page: {
+          page_size: per_page * 1,
+          page: current_page,
+          total
+        }
+      }
+      dispatch(createAction(ACTION.SET_SHARE)(payload))
+    } catch (error) {
+      message.error(error)
+    }
+  }
+}
+export const getSetManage = params => {
+  return async (dispatch) => {
+    try {
+      const p = await getData(API.SET_MANAGE, params)
+      const { errcode, data: {
+        current_page,
+        per_page,
+        total,
+        data: lists
+      }
+      } = p
+      if (errcode !== 0) {
+        throw new Error(p.message)
+      }
+      const payload = {
+        lists: lists.map(list => {
+          const { id, title: name, department, teacher, training_plans } = list
+          const { name: leader } = teacher
+          let teachers = []
+          let courses = []
+          training_plans.forEach(item => {
+            courses = [...courses, item.course.course_no + ' ' + item.course.title]
+            teachers = [...teachers, item.teachers.join(',') || '暂无']
+          })
+          return {
+            id,
+            name,
+            leader,
+            courses,
+            department: department.title,
+            teacher: teachers
+          }
+        }),
+        page: {
+          page_size: per_page * 1,
+          page: current_page,
+          total
+        }
+      }
+      dispatch(createAction(ACTION.SET_MANAGE)(payload))
+    } catch (error) {
+      message.error(error)
+    }
+  }
+}
