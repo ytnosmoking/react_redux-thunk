@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { ConfigProvider } from 'antd'
 import store from './store'
 import zhCN from 'antd/es/locale/zh_CN';
 import 'animate.css'
-
+import { isDev } from 'utils/config'
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -14,6 +14,7 @@ import * as serviceWorker from './serviceWorker';
 
 
 
+const Router = isDev ? BrowserRouter : HashRouter
 
 ReactDOM.render(<Provider store={store}>
   <Router>
