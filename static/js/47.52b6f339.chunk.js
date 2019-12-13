@@ -1,0 +1,1 @@
+(this["webpackJsonpreact-01"]=this["webpackJsonpreact-01"]||[]).push([[47],{453:function(p,s,t){p.exports=t.p+"static/media/school.183bfe56.png"}}]);

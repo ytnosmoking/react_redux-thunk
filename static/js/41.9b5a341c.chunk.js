@@ -1,0 +1,1 @@
+(this["webpackJsonpreact-01"]=this["webpackJsonpreact-01"]||[]).push([[41],{205:function(e,t,n){"use strict";n.r(t);var a=n(0),l=n.n(a);t.default=function(e){var t=e.title,n=e.txt,a=void 0===n?l.a.createElement("div",null):n,c=e.btn,i=void 0===c?l.a.createElement("div",null):c;return l.a.createElement("div",{className:"content-title"},l.a.createElement("h3",null,t),a,i)}}}]);
