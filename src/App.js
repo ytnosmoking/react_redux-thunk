@@ -4,7 +4,6 @@ import { Route, Switch } from 'react-router-dom'
 import Login from 'views/Login'
 import DashBoard from 'component/DashBoard'
 
-
 // @withRouter
 class BaseRoute extends Component {
   constructor(props) {

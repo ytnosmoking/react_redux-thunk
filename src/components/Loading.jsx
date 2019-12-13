@@ -20,7 +20,7 @@ export default name => {
   return Loadable({
     loader: () => import(`views/${name}`),
     loading,
-    delay: 300
+    delay: 1000
   });
 };
 
@@ -28,6 +28,6 @@ export const LoadComponent = name => {
   return Loadable({
     loader: () => import(`component/${name}`),
     loading,
-    delay: 300
+    delay: 1000
   });
 };

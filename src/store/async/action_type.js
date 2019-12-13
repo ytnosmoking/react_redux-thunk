@@ -31,3 +31,19 @@ export const SET_OUTLINE_INFO = 'setOutLineInfo'
 export const SET_TABLE = 'setTable'
 export const SET_SHARE = 'setShare'
 export const SET_MANAGE = 'setManage'
+
+// DICTIONARY
+export const DIC_COLLEGE = 'dicCollege'
+export const DIC_DEPARTMENT = 'dicDepartment'
+export const DIC_MAJOR = 'dicMajor'
+export const DIC_CLASSES = 'dicClasses'
+export const DIC_TERMS = 'dicTerms'
+export const DIC_COURSETYPE = 'dicCourseType'
+
+// MANAGE
+export const MANAGE_COURSES = 'manageCourses'
+export const MANAGE_TEACHER = 'manageTeacher'
+export const MANAGE_STUDENT = 'manageStudent'
+
+
+export const RECORD_UPLOAD = 'recordUpload'

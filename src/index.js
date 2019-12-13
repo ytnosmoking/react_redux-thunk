@@ -6,8 +6,6 @@ import { ConfigProvider } from 'antd'
 import store from './store'
 import zhCN from 'antd/es/locale/zh_CN';
 import 'animate.css'
-import './assets/css/index.css'
-import './assets/css/common.less'
 
 
 import App from './App';

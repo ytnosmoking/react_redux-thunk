@@ -1,6 +1,6 @@
 import React from 'react';
 import { Progress } from 'antd'
-
+import { filterRole } from 'utils/tools'
 
 const fixed = true
 const width = 200
@@ -113,6 +113,18 @@ export const content = (config = {}) => ({
 })
 export const weight = (config = {}) => ({
   ...defaultCol('权重', 'weight'),
+  ...config
+})
+export const college = (config = {}) => ({
+  ...defaultCol('学院', 'college'),
+  ...config
+})
+export const create_time = (config = {}) => ({
+  ...defaultCol('添加时间', 'create_time'),
+  ...config
+})
+export const role = (config = {}) => ({
+  ...defaultCol('角色', 'role'),
   ...config
 })
 
@@ -382,4 +394,102 @@ export const setManage = [
       ))
     )
   }),
+]
+
+export const dicCollege = [
+  name({ title: 'id', dataIndex: 'id', key: 'id', width: 100 }),
+  college(),
+  create_time()
+]
+
+export const dicDepartment = [
+  name({ title: 'id', dataIndex: 'id', key: 'id', width: 100 }),
+  college(),
+  department(),
+  create_time()
+]
+export const dicMajor = [
+  name({ title: 'id', dataIndex: 'id', key: 'id', width: 100 }),
+  college(),
+  department(),
+  major(),
+  create_time()
+]
+export const dicClasses = [
+  name({ title: 'id', dataIndex: 'id', key: 'id', width: 100 }),
+  college(),
+  department(),
+  major(),
+  classes(),
+  enter_year({
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.enter_year - b.enter_year,
+  }),
+  create_time()
+]
+
+export const dicTerm = [
+  name({ title: 'id', dataIndex: 'id', key: 'id', width: 100 }),
+  terms(),
+  create_time()
+]
+export const dicCourseType = [
+  name({ title: 'id', dataIndex: 'id', key: 'id', width: 100 }),
+  course_type({ title: '课程类别' }),
+  create_time()
+]
+
+export const manageCourse = [
+  course_no(),
+  name({ title: '课程名称', dataIndex: 'title' }),
+  course_type(),
+  score()
+]
+
+export const manageTeacher = [
+  name({ title: '教师姓名' }),
+  number({ title: '职工号' }),
+  role({
+    render: txt => {
+      return (
+        <div>{filterRole(txt)}</div>
+      )
+    }
+  }),
+  department()
+]
+
+export const manageStudent = [
+  enter_year(),
+  department(),
+  major(),
+  classes(),
+  number({ title: '学号' }),
+  name(),
+  name({
+    title: '性别', dataIndex: 'sex', key: 'sex',
+  }),
+]
+
+export const recordUpload = [
+  name({ title: 'id', dataIndex: 'id', key: 'id', width: 100 }),
+  number({ title: '教师编号' }),
+  name({ title: '教师姓名' }),
+  role({ title: '身份', render:txt=>filterRole(txt)}),
+  content({ title: '具体负责', dataIndex: 'work', key: 'work' }),
+  create_time({ title: '上传时间', dataIndex: 'updated_at', key: 'updated_at' }),
+  name({ title: '上传行数', dataIndex: 'lines', key: 'lines' }),
+  name({ title: '已处理行数', dataIndex: 'done', key: 'done' }),
+  name({ title: '成功行数', dataIndex: 'success', key: 'success' }),
+  name({ title: '失败行数', dataIndex: 'fail', key: 'fail' }),
+  name({ 
+        title: '失败内容',
+        dataIndex: 'errors',
+        key: 'errors',
+        width: 400,
+        render:(txt)=>(
+          (txt&&txt.length)?txt.map((item,index)=>(
+            <div key={index}>{item}</div>
+          )):'')
+      }),
 ]

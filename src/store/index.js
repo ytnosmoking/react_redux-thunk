@@ -2,9 +2,13 @@ import { applyMiddleware, createStore } from 'redux'
 
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
-
+import {isDev} from 'utils/config'
 
 import reducer from './reducer'
-const store = createStore(reducer, applyMiddleware(thunk, logger))
+const middleWare = [thunk]
+if(isDev) {
+  middleWare.push(logger)
+}
+const store = createStore(reducer, applyMiddleware(...middleWare))
 
 export default store

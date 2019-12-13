@@ -45,7 +45,7 @@ class LoginView extends Component {
       <div className="cont">
         <div >
           <img src="./imgs/school.png" alt="" className='logo' />
-          <Form onSubmit={this.handleSubmit} className='login-form'>
+          <Form onSubmit={this.handleSubmit} className='loginForm'>
 
             <Form.Item>
               {getFieldDecorator('teacher_no', {
@@ -69,7 +69,7 @@ class LoginView extends Component {
               )}
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit" className='login-form-button'>
+              <Button type="primary" htmlType="submit" className='loginBtn'>
                 Log in
           </Button>
             </Form.Item>

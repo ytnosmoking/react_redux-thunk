@@ -1,12 +1,6 @@
 import { Component } from 'react';
 
 
-
-
-
-
-
-
 class State extends Component {
   constructor(props) {
     super(props)
@@ -60,49 +54,6 @@ class Btns extends Params {
   };
 }
 
-// export const HomeState = class extends Btns {}
-// export const HomeState = class extends Mix(State, Params, Btns) { }
 export const HomeState = class extends Btns { }
-
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     scroll,
-  //     search_params
-  //   }
-  // }
-  // fixedParams
-  // fixedParams = (params = {}) => {
-  //   params = { ...this.state.search_params, ...params }
-  //   Object.keys(params).forEach(key => {
-  //     if (!params[key]) {
-  //       delete params[key];
-  //     }
-  //   });
-  //   return params;
-  // };
-  // resetParams = (params = {}) => {
-  //   params = { ...this.state.search_params, ...params }
-  //   Object.keys(params).forEach(key => {
-  //     params[key] = null;
-  //   });
-  //   return params;
-  // };
-  // confirm = () => {
-  //   console.log(this)
-  //   const params = this.fixedParams();
-  //   this.getList({ ...params, page: 1 });
-  // };
-  // reset = () => {
-  //   this.setState(
-  //     {
-  //       search_params: this.resetParams()
-  //     },
-  //     () => {
-  //       this.confirm();
-  //     }
-  //   );
-  // };
-// }
 
 

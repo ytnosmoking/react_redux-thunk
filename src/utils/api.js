@@ -55,21 +55,21 @@ export const API = {
   finishReportInfo: '/training-plan-explains', // 支撑点报表
   downloadReport: '/training-plan-explains/download', // 支撑点报表下载
   // -----基本元素------
-  colleges: '/colleges', // 学院
+  DIC_COLLEGE: '/colleges', // 学院
   DEPARTMENTS: '/departments', // 系
   MAJOR: '/majors', // 专业
-  classes: '/classes', // 班级
+  CLASSES: '/classes', // 班级
   TERMS: '/terms', // 学期
-  courses: '/course-types', // 课程类别
+  COURSETYPE: '/course-types', // 课程类别
   // ---------基本信息管理----------
   TEACHERS: '/teachers',
-  info_student: '/students',
-  info_course: '/courses',
+  STUDENT: '/students',
+  COURSES: '/courses',
   searchStudent: '/whut-students', // 搜索学生
   exportSomeStudents: '/student/batch-store', // 批量添加学生
   resetCode: '/teacher/reset-password', // 重置密码
   // 记录
-  getRecord: '/import-records', // 查看导入记录
+  RECORD: '/import-records', // 查看导入记录
 
   // upload xls
   studentImport: '/student/import',
