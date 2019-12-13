@@ -1,3 +1,4 @@
+
 // adjustStyleLoaders,
 const {
   override,
@@ -11,51 +12,27 @@ const path = require('path');
 function resolve(dir) {
   return path.join(__dirname, '.', dir)
 }
-
-const changePath = () => config => {
-  // const path = require('path');
-  console.log(config.output)
-  //  const paths = require('react-scripts/config/paths');
-  //  paths.appBuild = path.join(path.dirname(paths.appBuild), 'dist');
-  config.output.publicPath = isDev ? config.output.publicPath : './';
-  return config
+const plugins = []
+if (isDev) {
+  plugins.push(new BundleAnalyzerPlugin())
 }
 
-const dropConsole = () => {
-  return (config) => {
-    // console.log(config.optimization.minimizer)
-    if (!isDev && config.optimization.minimizer) {
+const customize = () => config => {
+  if (!isDev) {
+    // pubicPath
+    config.output.publicPath = './';
+    // dropConsole
+    if (config.optimization.minimizer) {
       config.optimization.minimizer.forEach((minimizer) => {
         if (minimizer.constructor.name === 'TerserPlugin') {
           minimizer.options.terserOptions.compress.drop_console = true
         }
       })
     }
-    return config;
   }
-}
 
-const addPlugin = () => {
-  return config => {
-    let plugins = []
-    if (isDev) {
-      plugins = [
-        ...plugins,
-        new BundleAnalyzerPlugin()
-      ]
-    }
-    config.plugins = [...config.plugins, ...plugins]
-    return config
-  }
-}
-const sourceMap = () => config => {
-  config.devtool = isDev ? 'cheap-module-source-map' : false;
-  return config
-}
-
-const debugLessLoader = () => config => {
+  // style-resource-loader
   const loaders = config.module.rules.find(rule => Array.isArray(rule.oneOf)).oneOf
-  // console.log(loaders[loaders.length - 3].use[1].options.modules)
   loaders[loaders.length - 3].use.push({
     loader: 'style-resources-loader',
     options: {
@@ -67,34 +44,20 @@ const debugLessLoader = () => config => {
       injector: 'append'
     }
   })
+  // addPlugin
+  config.plugins.push(...plugins)
   return config
 }
 
-
 module.exports = override(
-  changePath(),
+
   addLessLoader(
     {
       javascriptEnabled: true,
       // modifyVars: { '@primary-color': '#1DA57A' },
     }
   ),
-  debugLessLoader(),
-  // adjustStyleLoaders(({ use: [less, css, postcss, resolve, processor] }) => {
-  //   console.log('--------------start------------------')
-  //   console.log(less)
-  //   console.log('---------------end------------------')
-  //   css.options.sourceMap = false;         // css-loader
-  //   postcss.options.sourceMap = false;     // postcss-loader
-  //   // when enable pre-processor,
-  //   // resolve-url-loader will be enabled too
-  //   if (resolve) {
-  //     resolve.options.sourceMap = false;   // resolve-url-loader
-  //   }
-  // }),
-  dropConsole(),
-  sourceMap(),
-  addPlugin(),
+  customize(),
   fixBabelImports('import', {
     libraryName: 'antd',
     libraryDirectory: 'es',
