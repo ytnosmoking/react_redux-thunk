@@ -11,6 +11,16 @@ const path = require('path');
 function resolve(dir) {
   return path.join(__dirname, '.', dir)
 }
+
+const changePath = () => config => {
+  // const path = require('path');
+  console.log(config.output)
+  //  const paths = require('react-scripts/config/paths');
+  //  paths.appBuild = path.join(path.dirname(paths.appBuild), 'dist');
+  config.output.publicPath = isDev ? config.output.publicPath : './';
+  return config
+}
+
 const dropConsole = () => {
   return (config) => {
     // console.log(config.optimization.minimizer)
@@ -62,6 +72,7 @@ const debugLessLoader = () => config => {
 
 
 module.exports = override(
+  changePath(),
   addLessLoader(
     {
       javascriptEnabled: true,
