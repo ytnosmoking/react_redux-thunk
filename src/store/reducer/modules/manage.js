@@ -8,9 +8,9 @@ const courseIno = {
 
 
 const status = {
-  manageCourses: 'courses',
-  manageTeacher: 'teacher',
-  manageStudent: 'student',
+  MANAGE_COURSES: 'courses',
+  MANAGE_TEACHER: 'teacher',
+  MANAGE_STUDENT: 'student',
 
 }
 const manageStore = (state = courseIno, action) => {

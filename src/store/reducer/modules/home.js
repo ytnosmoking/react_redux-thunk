@@ -9,11 +9,11 @@ const homeInfo = {
 }
 
 const status = {
-  getHomeNeed: 'need',
-  getHomeStudent: 'student',
-  getHomeStudentInfo: 'studentInfo',
-  getHomeSupport: 'support',
-  getHomeCourse: 'course',
+  HOME_NEED: 'need',
+  HOME_STUDENT: 'student',
+  HOME_STUDENT_INFO: 'studentInfo',
+  HOME_SUPPORT: 'support',
+  HOME_COURSE: 'course',
 }
 
 

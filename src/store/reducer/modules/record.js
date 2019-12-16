@@ -1,11 +1,11 @@
 import { listModel } from 'utils/tools'
 
 const homeInfo = {
- upload:listModel()
+  upload: listModel()
 }
 
 const status = {
-  recordUpload: 'upload',
+  RECORD_UPLOAD: 'upload',
 }
 
 

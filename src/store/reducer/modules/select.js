@@ -11,14 +11,14 @@ const info = {
 }
 
 const status = {
-  major: 'majors',
-  terms: 'terms',
-  departments: 'departments',
-  teachers: 'teachers',
+  MAJOR: 'majors',
+  TERMS: 'terms',
+  DEPARTMENTS: 'departments',
+  TEACHERS: 'teachers',
 }
 const status_arr = {
-  requireMents: 'requireMents',
-  supportHead: 'supportHead',
+  REQUIRE_MENTS: 'requireMents',
+  SUPPORT_HEAD: 'supportHead',
 }
 
 const select = (state = info, action) => {

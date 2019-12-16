@@ -12,11 +12,11 @@ const golobalState = {
 
 const globalReducer = (state = golobalState, action) => {
   const { type } = action
-  if (type === 'login') {
+  if (type === 'LOGIN') {
     const { isLogin, info } = action.payload
     return { ...state, isLogin, info }
   }
-  if (type === 'logout') {
+  if (type === 'LOGOUT') {
     removeItem('isLogin')
     return { ...state, info: {}, isLogin: false }
   }

@@ -17,17 +17,17 @@ const setIno = {
 }
 
 const status = {
-  setNeed: 'need',
-  setLine: 'line',
-  setProject: 'project',
-  setProjectInfo: 'projectInfo',
-  setSupport: 'support',
-  setSupportInfo: 'supportInfo',
-  setOutLine: 'outLine',
-  setOutLineInfo: 'outLineInfo',
-  setTable: 'table',
-  setShare: 'share',
-  setManage: 'manage',
+  // setNeed: 'need',
+  SET_LINE: 'line',
+  SET_PROJECT: 'project',
+  SET_PROJECT_INFO: 'projectInfo',
+  SET_SUPPORT: 'support',
+  SET_SUPPORT_INFO: 'supportInfo',
+  SET_OUTLINE: 'outLine',
+  SET_OUTLINE_INFO: 'outLineInfo',
+  SET_TABLE: 'table',
+  SET_SHARE: 'share',
+  SET_MANAGE: 'manage',
 }
 const ArrName = ['need', 'outLineInfo']
 

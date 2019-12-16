@@ -14,12 +14,12 @@ const courseIno = {
 
 
 const status = {
-  dicCollege: 'college',
-  dicDepartment: 'department',
-  dicMajor: 'major',
-  dicClasses: 'classes',
-  dicTerms: 'terms',
-  dicCourseType: 'courseType',
+  DIC_COLLEGE: 'college',
+  DIC_DEPARTMENT: 'department',
+  DIC_MAJOR: 'major',
+  DIC_CLASSES: 'classes',
+  DIC_TERMS: 'terms',
+  DIC_COURSETYPE: 'courseType',
 
 }
 const dictionary = (state = courseIno, action) => {

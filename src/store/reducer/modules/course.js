@@ -8,9 +8,9 @@ const courseIno = {
 
 
 const status = {
-  courseManage: 'manage',
-  courseManageScore: 'manageScore',
-  courseTarget: 'target',
+  COURSE_MANAGE: 'manage',
+  COURSE_MANAGE_SCORE: 'manageScore',
+  COURSE_TARGET: 'target',
 }
 const courseStore = (state = courseIno, action) => {
   const { type } = action
