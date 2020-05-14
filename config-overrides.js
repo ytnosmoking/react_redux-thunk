@@ -14,13 +14,15 @@ function resolve(dir) {
 }
 const plugins = []
 if (isDev) {
-  plugins.push(new BundleAnalyzerPlugin())
+  plugins.push(new BundleAnalyzerPlugin({
+    analyzerPort: 8889
+  }))
 }
 
 const customize = () => config => {
   if (!isDev) {
     // pubicPath
-    config.output.publicPath = './';
+    // config.output.publicPath = './';
     // dropConsole
     if (config.optimization.minimizer) {
       config.optimization.minimizer.forEach((minimizer) => {

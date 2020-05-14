@@ -13,6 +13,11 @@ class BaseContent extends Component {
       routes: []
     };
   }
+  componentDidMount() {
+    // const buf = Buffer.from("MTIz", "base64").toString();
+    // console.log(buf);
+    // console.log(buf.toString());
+  }
 
   render() {
     const { location, action } = this.props.history;
