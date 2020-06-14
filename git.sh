@@ -70,6 +70,7 @@ then
 elif [ "$msg" == "$mergeTo" ]
 then 
     echo "------ will merge to "
+    gitMergeTo
 else 
     gitPush
 fi
