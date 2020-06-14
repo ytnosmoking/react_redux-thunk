@@ -41,7 +41,7 @@ function gitPush() {
 
 
 msg=$1
-merge
+
 if [ ! -n "$msg" ]
 then
     msg='push default'
