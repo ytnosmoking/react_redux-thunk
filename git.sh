@@ -26,7 +26,7 @@ function gitMergeFrom () {
     echo '-------- git has pull   ------------'
     # git checkout dev
     echo '-------- git chekout dev -----------'
-    git chekout dev
+    git checkout dev
     # git merge from master
     git merge master
     echo '------- git merge master  ----------'
@@ -66,7 +66,7 @@ fi
 if [ "$msg" == "$merge" ]
 then
     echo "------ will merge from "
-
+    gitMergeFrom
 elif [ "$msg" == "$mergeTo" ]
 then 
     echo "------ will merge to "
