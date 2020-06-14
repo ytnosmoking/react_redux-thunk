@@ -3,20 +3,20 @@
 const {
   override,
   addLessLoader,
-  fixBabelImports, addDecoratorsLegacy, addWebpackAlias } = require('customize-cra')
+  fixBabelImports, addDecoratorsLegacy, addWebpackAlias } = require('customize-cra');
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === 'development';
 const path = require('path');
 function resolve(dir) {
-  return path.join(__dirname, '.', dir)
+  return path.join(__dirname, '.', dir);
 }
-const plugins = []
+const plugins = [];
 if (isDev) {
   plugins.push(new BundleAnalyzerPlugin({
     analyzerPort: 8889
-  }))
+  }));
 }
 
 const customize = () => config => {
@@ -27,14 +27,14 @@ const customize = () => config => {
     if (config.optimization.minimizer) {
       config.optimization.minimizer.forEach((minimizer) => {
         if (minimizer.constructor.name === 'TerserPlugin') {
-          minimizer.options.terserOptions.compress.drop_console = true
+          minimizer.options.terserOptions.compress.drop_console = true;
         }
-      })
+      });
     }
   }
 
   // style-resource-loader
-  const loaders = config.module.rules.find(rule => Array.isArray(rule.oneOf)).oneOf
+  const loaders = config.module.rules.find(rule => Array.isArray(rule.oneOf)).oneOf;
   loaders[loaders.length - 3].use.push({
     loader: 'style-resources-loader',
     options: {
@@ -45,17 +45,17 @@ const customize = () => config => {
         ],
       injector: 'append'
     }
-  })
+  });
   // addPlugin
-  config.plugins.push(...plugins)
-  return config
-}
+  config.plugins.push(...plugins);
+  return config;
+};
 
 module.exports = override(
 
   addLessLoader(
     {
-      javascriptEnabled: true,
+      javascriptEnabled: true
       // modifyVars: { '@primary-color': '#1DA57A' },
     }
   ),
@@ -73,5 +73,5 @@ module.exports = override(
     utils: resolve('src/utils'),
     router: resolve('src/router')
   })
-)
+);
 

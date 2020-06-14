@@ -2,12 +2,12 @@
 import { message } from 'antd'
 import { getData, postData } from 'utils/ajax'
 import { API } from 'utils/api'
-import { setItem, createAction } from 'utils/tools'
+import { setItem, createAction, actionObj } from 'utils/tools'
 import * as ACTION from './action_type'
 // 所有设置的action 都可以不要了 利用createAction 动态生成action
 
 export const Login = (params) => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await postData(API.LOGIN, params)
     const { data: { token }, errcode } = p
     if (errcode === 0) {
@@ -16,7 +16,10 @@ export const Login = (params) => {
     const userInfo = await getData(API.USER_INFO)
     const { data: info } = userInfo
     const payload = { isLogin: token, info }
-    dispatch(createAction(ACTION.LOGIN)(payload))
+    // dispatch(createAction(ACTION.LOGIN)(payload))
+    console.log(1)
+    // dispatch({ type: ACTION.LOGIN, payload })
+    dispatch(actionObj(ACTION.LOGIN, payload))
     return p
   }
 }
@@ -27,7 +30,7 @@ const getDetail = (p) => {
     per_page,
     total,
     data: lists
-  } } = p
+  }} = p
   return {
     errcode, lists, page: {
       page_size: per_page * 1,
@@ -39,7 +42,7 @@ const getDetail = (p) => {
 
 // 专业
 export const getMajors = (params = { page_size: 10, page: 1 }) => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.MAJOR, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -54,7 +57,7 @@ export const getMajors = (params = { page_size: 10, page: 1 }) => {
 }
 // 学期
 export const getTerms = (params = { page_size: 10, page: 1 }) => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.TERMS, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -70,8 +73,8 @@ export const getTerms = (params = { page_size: 10, page: 1 }) => {
 
 // 要求 getRequireMents
 export const getRequireMents = (params = { page_size: 10, page: 1 }) => {
-  return async (dispatch) => {
-    // 
+  return async(dispatch) => {
+    //
     const p = await getData(API.REQUIRE_MENTS, params)
     console.log(p)
     const { errcode, data: lists } = p
@@ -83,8 +86,8 @@ export const getRequireMents = (params = { page_size: 10, page: 1 }) => {
 }
 // 支撑点
 export const getSupport = (params) => {
-  return async (dispatch) => {
-    // 
+  return async(dispatch) => {
+    //
     const p = await getData(API.SUPPORT_HEAD, params)
     console.log(p)
     const { errcode, data: lists } = p
@@ -96,7 +99,7 @@ export const getSupport = (params) => {
 }
 // 系
 export const getDepartment = (params = { page_size: 10, page: 1 }) => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.DEPARTMENTS, params)
     console.log(p)
     const { errcode, page, lists } = getDetail(p)
@@ -112,7 +115,7 @@ export const getDepartment = (params = { page_size: 10, page: 1 }) => {
 }
 // 课程组长 老师
 export const getTeacher = (params = { page_size: 10, page: 1 }) => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.TEACHERS, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -128,7 +131,7 @@ export const getTeacher = (params = { page_size: 10, page: 1 }) => {
 
 // Home
 export const getHomeNeed = (params) => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.HOME_NEED, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -143,7 +146,7 @@ export const getHomeNeed = (params) => {
 }
 
 export const getHomeStudent = (params) => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.HOME_STUDENT, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -171,7 +174,7 @@ export const getHomeStudent = (params) => {
 }
 
 export const getHomeStudentInfo = (params) => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.HOME_STUDENT_INFO, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -187,7 +190,7 @@ export const getHomeStudentInfo = (params) => {
           course_no,
           course_type,
           title,
-          credit,
+          credit
         }
       }),
       page
@@ -197,7 +200,7 @@ export const getHomeStudentInfo = (params) => {
 }
 
 export const getHomeSupport = (params) => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.HOME_SUPPORT, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -211,7 +214,7 @@ export const getHomeSupport = (params) => {
           enter_year,
           achivement,
           major,
-          support: graduate_requirement.number + '.' + graduate_explain.number,
+          support: graduate_requirement.number + '.' + graduate_explain.number
         }
       }),
       page
@@ -221,7 +224,7 @@ export const getHomeSupport = (params) => {
 }
 
 export const getHomeCourse = (params) => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.HOME_COURSE, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -262,10 +265,9 @@ export const getHomeCourse = (params) => {
   }
 }
 
-
 // Course
 export const getCourseManage = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.COURSE_MANAGE, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -280,7 +282,7 @@ export const getCourseManage = params => {
 }
 
 export const getCourseManageScore = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.COURSE_MANAGE_SCORE, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -295,7 +297,7 @@ export const getCourseManageScore = params => {
 }
 
 export const getCourseTarget = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.COURSE_TARGET, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -311,7 +313,7 @@ export const getCourseTarget = params => {
 
 // Set
 export const getSetLine = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.SET_LINE, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -339,7 +341,7 @@ export const getSetLine = params => {
 }
 
 export const getSetProject = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.SET_PROJECT, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -354,7 +356,7 @@ export const getSetProject = params => {
 }
 
 export const getSetProjectInfo = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.SET_PROJECT_INFO, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -379,7 +381,7 @@ export const getSetProjectInfo = params => {
 }
 
 export const getSetSupport = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     try {
       const p = await getData(API.SET_SUPPORT, params)
       const { errcode, data: {
@@ -387,7 +389,7 @@ export const getSetSupport = params => {
         per_page,
         total,
         data: lists
-      } } = p
+      }} = p
       if (errcode !== 0) {
         throw new Error(p.message)
       }
@@ -418,7 +420,7 @@ export const getSetSupport = params => {
 }
 
 export const getSetSupportInfo = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.SET_SUPPORT_INFO, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -427,7 +429,7 @@ export const getSetSupportInfo = params => {
     const payload = {
       lists: lists.map(list => {
         const { training_plan, weight, id } = list
-        const { course: { course_no, title: courses, credit: score } } = training_plan
+        const { course: { course_no, title: courses, credit: score }} = training_plan
         return {
           key: id,
           course_no,
@@ -439,12 +441,11 @@ export const getSetSupportInfo = params => {
       page
     }
     dispatch(createAction(ACTION.SET_SUPPORT_INFO)(payload))
-
   }
 }
 
 export const getSetOutLine = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.SET_PROJECT_INFO, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -471,8 +472,7 @@ export const getSetOutLine = params => {
 }
 
 export const getSetOutLineInfo = params => {
-  return async (dispatch) => {
-
+  return async(dispatch) => {
     const p = await getData(API.SET_OUTLINE_INFO, params)
     const { errcode, data: lists
     } = p
@@ -495,7 +495,7 @@ export const getSetOutLineInfo = params => {
 }
 
 export const getSetTable = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.SET_PROJECT, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -510,7 +510,7 @@ export const getSetTable = params => {
 }
 
 export const getSetShare = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.SET_PROJECT_INFO, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -536,7 +536,7 @@ export const getSetShare = params => {
 }
 
 export const getSetManage = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.SET_MANAGE, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -568,8 +568,7 @@ export const getSetManage = params => {
 }
 
 export const getDicCollege = params => {
-  return async (dispatch) => {
-
+  return async(dispatch) => {
     const p = await getData(API.DIC_COLLEGE, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -592,8 +591,7 @@ export const getDicCollege = params => {
 }
 
 export const getDicDepartment = params => {
-  return async (dispatch) => {
-
+  return async(dispatch) => {
     const p = await getData(API.DEPARTMENTS, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -617,8 +615,7 @@ export const getDicDepartment = params => {
 }
 
 export const getDicMajor = params => {
-  return async (dispatch) => {
-
+  return async(dispatch) => {
     const p = await getData(API.MAJOR, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -626,7 +623,7 @@ export const getDicMajor = params => {
     }
     const payload = {
       lists: lists.map(list => {
-        const { id, department: { title: department, college: { title: college } }, title: major, created_at: create_time } = list
+        const { id, department: { title: department, college: { title: college }}, title: major, created_at: create_time } = list
 
         return {
           id,
@@ -643,8 +640,7 @@ export const getDicMajor = params => {
 }
 
 export const getDicClasses = params => {
-  return async (dispatch) => {
-
+  return async(dispatch) => {
     const p = await getData(API.CLASSES, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -683,7 +679,7 @@ export const getDicClasses = params => {
 }
 
 export const getDicTerms = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.TERMS, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -707,7 +703,7 @@ export const getDicTerms = params => {
 }
 
 export const getDicCourseType = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.COURSETYPE, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -727,13 +723,11 @@ export const getDicCourseType = params => {
       page
     }
     dispatch(createAction(ACTION.DIC_COURSETYPE)(payload))
-
   }
 }
 
-
 export const getManageCourse = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.COURSES, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -762,9 +756,8 @@ export const getManageCourse = params => {
   }
 }
 
-
 export const getManageTeacher = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.TEACHERS, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -783,18 +776,17 @@ export const getManageTeacher = params => {
           name,
           number,
           role,
-          department: (department && department.title) || '',
+          department: (department && department.title) || ''
         }
       }),
       page
     }
     dispatch(createAction(ACTION.MANAGE_TEACHER)(payload))
-
   }
 }
 
 export const getManageStudent = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.STUDENT, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
@@ -809,12 +801,12 @@ export const getManageStudent = params => {
             major: { title: major,
               department: {
                 title: department
-              },
+              }
             }
           },
           student_no: number,
           name,
-          sex,
+          sex
 
         } = list
         return {
@@ -831,12 +823,11 @@ export const getManageStudent = params => {
       page
     }
     dispatch(createAction(ACTION.MANAGE_STUDENT)(payload))
-
   }
 }
 // record
 export const getRecordUpload = params => {
-  return async (dispatch) => {
+  return async(dispatch) => {
     const p = await getData(API.RECORD, params)
     const { errcode, page, lists } = getDetail(p)
     if (errcode !== 0) {
