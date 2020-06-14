@@ -17,7 +17,7 @@ function gitPush() {
 
 function gitMergeFrom () {
     gitPush
-    echo "---------- git merger from  --------------"
+    echo "-------- git merge from  --------------"
     # git checkout master
     git checkout master
     echo '-------- git has checkout branch master -----'
@@ -29,7 +29,7 @@ function gitMergeFrom () {
     git chekout dev
     # git merge from master
     git merge master
-    echo '------- git merge master  ----------'
+    echo '-------- git merge master  ----------'
 }
 
 function gitMergeTo () {
@@ -40,9 +40,11 @@ function gitMergeTo () {
      # git pull
     git pull 
     echo '-------- git has pull   ------------'
+
     # git checkout master
     echo '-------- git chekout master -----------'
     git checkout master
+    
     # git merge from master
     git merge dev
     echo '------- git merge dev  ----------'
