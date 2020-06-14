@@ -41,13 +41,14 @@ function gitPush() {
 
 
 msg=$1
+merge="merge"
 
 if [ ! -n "$msg" ]
 then
     msg='push default'
 fi
 
-if [ "$msg" -eq 'merge' ]
+if [ "$msg" -eq "$merge" ]
 then
     echo '------$msg'
 else 
