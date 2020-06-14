@@ -32,7 +32,7 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "serve": " nodemon ./serve",
-    "push": "./git.sh"
+    "git": "./git.sh"
   },
   "eslintConfig": {
     "extends": "react-app"
