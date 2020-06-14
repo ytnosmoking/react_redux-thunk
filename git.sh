@@ -42,9 +42,9 @@ function gitMergeTo () {
     echo '-------- git has pull   ------------'
     # git checkout master
     echo '-------- git chekout master -----------'
-    git checkout $2
+    git checkout master
     # git merge from master
-    git merge $3
+    git merge dev
     echo '------- git merge dev  ----------'
 }
 
