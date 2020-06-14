@@ -10,8 +10,10 @@ class BaseRoute extends Component {
     super(props);
     this.state = {};
   }
+
   render() {
-    console.log('%c只是个 首页路由页面', "color: white;font-size:20px; font-style: italic; background-color: red;padding: 2px")
+    console.log('test')
+    console.log('%c只是个 首页路由页面', 'color: white;font-size:20px; font-style: italic; background-color: red;padding: 2px')
     return (
       <Switch >
         <Route exact path='/login' component={Login}></Route>
