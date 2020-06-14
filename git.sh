@@ -55,6 +55,8 @@ function gitMergeTo () {
 msg="$1"
 merge="merge"
 mergeTo="mergeTo"
+branch1="$2"
+branch2="$3" 
 
 if [ ! -n "$msg" ]
 then
@@ -65,10 +67,9 @@ if [ "$msg" == "$merge" ]
 then
     echo "------ will merge from "
 
-elif [ "$msg" == "$mergeTo"]
+elif [ "$msg" == "$mergeTo" ]
 then 
     echo "------ will merge to "
-    
 else 
     gitPush
 fi
