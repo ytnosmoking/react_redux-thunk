@@ -66,7 +66,7 @@ fi
 if [ "$msg" == "$merge" ]
 then
     echo "------ will merge from "
-
+    gitMergeFrom
 elif [ "$msg" == "$mergeTo" ]
 then 
     echo "------ will merge to "
