@@ -6,7 +6,7 @@ class BasePagination extends Component {
     super(props);
     this.state = {};
   }
-  changePage = page => {
+  changePage = (page) => {
     const { params, getList } = this.props;
     getList({ ...params, page });
   };

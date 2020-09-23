@@ -3,14 +3,14 @@
 const {
   override,
   addLessLoader,
-  fixBabelImports, addDecoratorsLegacy, addWebpackAlias } = require('customize-cra');
+  fixBabelImports, addDecoratorsLegacy, addWebpackAlias } = require("customize-cra");
 
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-const isDev = process.env.NODE_ENV === 'development';
-const path = require('path');
+const isDev = process.env.NODE_ENV === "development";
+const path = require("path");
 function resolve(dir) {
-  return path.join(__dirname, '.', dir);
+  return path.join(__dirname, ".", dir);
 }
 const plugins = [];
 if (isDev) {
@@ -26,7 +26,7 @@ const customize = () => config => {
     // dropConsole
     if (config.optimization.minimizer) {
       config.optimization.minimizer.forEach((minimizer) => {
-        if (minimizer.constructor.name === 'TerserPlugin') {
+        if (minimizer.constructor.name === "TerserPlugin") {
           minimizer.options.terserOptions.compress.drop_console = true;
         }
       });
@@ -36,14 +36,14 @@ const customize = () => config => {
   // style-resource-loader
   const loaders = config.module.rules.find(rule => Array.isArray(rule.oneOf)).oneOf;
   loaders[loaders.length - 3].use.push({
-    loader: 'style-resources-loader',
+    loader: "style-resources-loader",
     options: {
       patterns:
         [
-          resolve('src/assets/css/common.less'),
-          resolve('src/assets/css/animate.less')
+          resolve("src/assets/css/common.less"),
+          resolve("src/assets/css/animate.less")
         ],
-      injector: 'append'
+      injector: "append"
     }
   });
   // addPlugin
@@ -60,18 +60,18 @@ module.exports = override(
     }
   ),
   customize(),
-  fixBabelImports('import', {
-    libraryName: 'antd',
-    libraryDirectory: 'es',
-    style: 'css'
+  fixBabelImports("import", {
+    libraryName: "antd",
+    libraryDirectory: "es",
+    style: "css"
   }),
   addDecoratorsLegacy(),
   addWebpackAlias({
-    views: resolve('src/views'),
-    component: resolve('src/components'),
-    store: resolve('src/store'),
-    utils: resolve('src/utils'),
-    router: resolve('src/router')
+    views: resolve("src/views"),
+    component: resolve("src/components"),
+    store: resolve("src/store"),
+    utils: resolve("src/utils"),
+    router: resolve("src/router")
   })
 );
 

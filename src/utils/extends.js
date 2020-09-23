@@ -1,6 +1,5 @@
 import { Component } from 'react';
 
-
 class State extends Component {
   constructor(props) {
     super(props)
@@ -14,9 +13,7 @@ class State extends Component {
   }
 }
 
-
 class Params extends State {
-
   fixedParams = (params = {}) => {
     params = { ...this.state.search_params, ...params }
     Object.keys(params).forEach(key => {
@@ -36,7 +33,6 @@ class Params extends State {
 }
 
 class Btns extends Params {
-
   confirm = () => {
     console.log(this)
     const params = this.fixedParams();
@@ -55,5 +51,4 @@ class Btns extends Params {
 }
 
 export const HomeState = class extends Btns { }
-
 

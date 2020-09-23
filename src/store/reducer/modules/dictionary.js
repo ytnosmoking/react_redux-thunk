@@ -1,6 +1,4 @@
 
-
-
 import { listModel } from 'utils/tools'
 
 const courseIno = {
@@ -9,9 +7,8 @@ const courseIno = {
   major: listModel(),
   classes: listModel(),
   terms: listModel(),
-  courseType: listModel(),
+  courseType: listModel()
 }
-
 
 const status = {
   DIC_COLLEGE: 'college',
@@ -19,13 +16,13 @@ const status = {
   DIC_MAJOR: 'major',
   DIC_CLASSES: 'classes',
   DIC_TERMS: 'terms',
-  DIC_COURSETYPE: 'courseType',
+  DIC_COURSETYPE: 'courseType'
 
 }
 const dictionary = (state = courseIno, action) => {
   const { type } = action
   if (status[type]) {
-    return { ...state, [status[type]]: { ...action.payload } }
+    return { ...state, [status[type]]: { ...action.payload }}
   }
   return state
 }

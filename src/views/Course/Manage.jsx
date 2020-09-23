@@ -16,18 +16,18 @@ const routes = [
   {
     name: "outLine",
     txt: "查看大纲",
-    component: ManageOutLine
+    component: ManageOutLine,
   },
   {
     name: "set",
     txt: "考核设置",
-    component: ManageSet
+    component: ManageSet,
   },
   {
     name: "score",
     txt: "上传成绩",
-    component: ManageScore
-  }
+    component: ManageScore,
+  },
 ];
 const tableCols = [
   ...CourseManageCols,
@@ -49,8 +49,8 @@ const tableCols = [
                 state: {
                   id: record.id,
                   title: route.txt,
-                  h3: record.term.title + "-" + record.course.title
-                }
+                  h3: record.term.title + "-" + record.course.title,
+                },
               }}
             >
               {route.txt}
@@ -58,15 +58,15 @@ const tableCols = [
           </Button>
         ))}
       </div>
-    )
-  })
+    ),
+  }),
 ];
 @connect(
-  state => ({
-    ...state.course.manage
+  (state) => ({
+    ...state.course.manage,
   }),
   {
-    getList
+    getList,
   }
 )
 class Manage extends HomeState {
@@ -81,20 +81,20 @@ class Manage extends HomeState {
     this.setState({
       scroll: {
         x: 1600,
-        y: ycal
-      }
+        y: ycal,
+      },
     });
     this.getList();
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
-      loading: false
+      loading: false,
     });
   }
-  getList = params => {
+  getList = (params) => {
     const { page, page_size } = this.props.page;
     this.setState({
-      loading: true
+      loading: true,
     });
     this.props.getList({ page, page_size, ...params });
   };
@@ -110,7 +110,7 @@ class Manage extends HomeState {
           style={{
             marginTop: 20,
             backgroundColor: "#fff",
-            maxHeight: scroll.y + "px"
+            maxHeight: scroll.y + "px",
           }}
           loading={loading}
           scroll={scroll}
@@ -125,7 +125,7 @@ class Manage extends HomeState {
           params={search_params}
           getList={this.getList}
         />
-        {routes.map(route => (
+        {routes.map((route) => (
           <Route
             key={route.name}
             path={`${this.props.match.path}/:id/${route.name}`}

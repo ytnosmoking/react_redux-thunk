@@ -13,15 +13,14 @@ const status = {
   HOME_STUDENT: 'student',
   HOME_STUDENT_INFO: 'studentInfo',
   HOME_SUPPORT: 'support',
-  HOME_COURSE: 'course',
+  HOME_COURSE: 'course'
 }
-
 
 const HomeStore = (state = homeInfo, action) => {
   const { type } = action
   const name = status[type]
   if (name) {
-    return { ...state, [name]: { ...action.payload } }
+    return { ...state, [name]: { ...action.payload }}
   }
   return state
 }

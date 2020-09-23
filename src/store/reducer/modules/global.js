@@ -9,7 +9,6 @@ const golobalState = {
   info: {}
 }
 
-
 const globalReducer = (state = golobalState, action) => {
   const { type } = action
   if (type === 'LOGIN') {
@@ -22,6 +21,5 @@ const globalReducer = (state = golobalState, action) => {
   }
   return state
 }
-
 
 export default globalReducer

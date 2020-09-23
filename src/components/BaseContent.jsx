@@ -10,7 +10,7 @@ class BaseContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      routes: []
+      routes: [],
     };
   }
   componentDidMount() {
@@ -27,7 +27,7 @@ class BaseContent extends Component {
     const classMap = {
       PUSH: "slideFromLeft",
       POP: "slideBackRight",
-      REPLACE: "slideFromLeft"
+      REPLACE: "slideFromLeft",
     };
     // const routes = this.state.routes;
     // const pathname = location.pathname;
@@ -44,7 +44,7 @@ class BaseContent extends Component {
       <TransitionGroup
         className="baseContent"
         childFactory={
-          child => React.cloneElement(child, { classNames: classMap[action] })
+          (child) => React.cloneElement(child, { classNames: classMap[action] })
           // React.cloneElement(child, { classNames: animated })
         }
       >
@@ -54,7 +54,7 @@ class BaseContent extends Component {
         >
           {/* <div className="baseContent"> */}
           <Switch location={location}>
-            {navRoutes.map(route => (
+            {navRoutes.map((route) => (
               <Route
                 path={route.pathname}
                 key={route.pathname}

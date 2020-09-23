@@ -11,8 +11,8 @@ import * as ACTION from "../store/async/action_type";
 import "./dashboard.less";
 const { Header, Sider, Content } = Layout;
 @connect(
-  state => ({
-    historyRoutes: state.history
+  (state) => ({
+    historyRoutes: state.history,
   }),
   { logout: createAction(ACTION.LOGOUT) }
 )
@@ -20,7 +20,7 @@ class DashBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showSide: true
+      showSide: true,
     };
   }
   exitSys = () => {
@@ -29,7 +29,7 @@ class DashBoard extends Component {
   };
   toggle = () => {
     this.setState({
-      showSide: !this.state.showSide
+      showSide: !this.state.showSide,
     });
   };
   render() {
@@ -39,7 +39,7 @@ class DashBoard extends Component {
         <Sider
           collapsed={!this.state.showSide}
           style={{
-            overflow: "auto"
+            overflow: "auto",
           }}
           width="220"
         >

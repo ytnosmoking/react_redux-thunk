@@ -11,18 +11,18 @@ import {
   getHomeSupport as getList,
   getMajors,
   getRequireMents,
-  getSupport
+  getSupport,
 } from "store/async";
 import { HomeState } from "utils/extends";
 
 @connect(
-  state => ({
+  (state) => ({
     // 专业
     majors: state.select.majors,
     // 要求
-    requireMents: state.select.requireMents.map(item => ({
+    requireMents: state.select.requireMents.map((item) => ({
       value: item.id,
-      label: `要求${item.number}`
+      label: `要求${item.number}`,
     })),
     // 支撑点
     supportHead: state.select.supportHead.reduce((pre, next) => {
@@ -30,15 +30,15 @@ import { HomeState } from "utils/extends";
       if (explains.length) {
         return [
           ...pre,
-          ...explains.map(item => ({
+          ...explains.map((item) => ({
             value: item.id,
-            label: `${number}.${item.number}`
-          }))
+            label: `${number}.${item.number}`,
+          })),
         ];
       }
       return pre;
     }, []),
-    ...state.home.support
+    ...state.home.support,
   }),
   { getList, getMajors, getRequireMents, getSupport }
 )
@@ -53,8 +53,8 @@ class Support extends HomeState {
     this.setState({
       scroll: {
         x: true,
-        y: ycal
-      }
+        y: ycal,
+      },
     });
     this.getList();
     const { requireMents } = this.props;
@@ -64,13 +64,13 @@ class Support extends HomeState {
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
-      loading: false
+      loading: false,
     });
   }
-  getList = params => {
+  getList = (params) => {
     const { page, page_size } = this.props.page;
     this.setState({
-      loading: true
+      loading: true,
     });
     this.props.getList({ page, page_size, ...params });
   };
@@ -80,15 +80,15 @@ class Support extends HomeState {
       {
         search_params: {
           ...this.state.search_params,
-          [key]: value
-        }
+          [key]: value,
+        },
       },
       () => {
         const { search_params } = this.state;
         const keys = ["enter_year", "major_id"];
-        if (keys.includes(key) && keys.every(item => search_params[item])) {
+        if (keys.includes(key) && keys.every((item) => search_params[item])) {
           const params = {};
-          keys.forEach(item => {
+          keys.forEach((item) => {
             params[item] = search_params[item];
           });
           this.props.getSupport(params);
@@ -106,7 +106,7 @@ class Support extends HomeState {
       return message.info("没有数据了");
     } else {
       const {
-        [key]: { lists, page: pageInfo }
+        [key]: { lists, page: pageInfo },
       } = this.props;
       if (lists.length >= pageInfo.total) {
         return message.info("没有数据了");
@@ -137,7 +137,7 @@ class Support extends HomeState {
               key: "major_id",
               value: search_params.major_id,
               listKey: "majors",
-              listType: "getMajors"
+              listType: "getMajors",
             }}
             options={majors.lists}
             getMore={this.getMoreList}
@@ -150,7 +150,7 @@ class Support extends HomeState {
               key: "graduate_requirement_id",
               value: search_params.graduate_requirement_id,
               listKey: "requireMents",
-              listType: "getRequireMents"
+              listType: "getRequireMents",
             }}
             isMore
             options={requireMents}
@@ -165,7 +165,7 @@ class Support extends HomeState {
               key: "graduate_explain_id",
               value: search_params.graduate_explain_id,
               listKey: "supportHead",
-              listType: "getSupport"
+              listType: "getSupport",
             }}
             isMore
             options={supportHead}
@@ -182,7 +182,7 @@ class Support extends HomeState {
         <Table
           style={{
             backgroundColor: "#fff",
-            maxHeight: scroll.y + "px"
+            maxHeight: scroll.y + "px",
             // minHeight: scroll.y + "px"
           }}
           loading={loading}
