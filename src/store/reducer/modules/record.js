@@ -5,9 +5,8 @@ const homeInfo = {
 }
 
 const status = {
-  RECORD_UPLOAD: 'upload',
+  RECORD_UPLOAD: 'upload'
 }
-
 
 const HomeStore = (state = homeInfo, action) => {
   const { type } = action

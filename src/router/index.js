@@ -1,8 +1,8 @@
+/* eslint-disable react/display-name */
 import React from 'react'
 
 import Loadable from 'component/Loading'
 import SwitchRoute from 'component/SwitchRoute'
-
 
 export const HomeRoute = {
   pathname: '/home',
@@ -11,7 +11,7 @@ export const HomeRoute = {
     icon: 'android'
   },
   // component: Loadable('Home'),
-  component: () => <SwitchRoute routes={HomeRoute} />,
+  component: () => <SwitchRoute displayName='1234' routes={HomeRoute} />,
   redirect: '/home/need',
   children: [
     {
@@ -49,15 +49,13 @@ export const HomeRoute = {
   ]
 }
 
-
-
-
 export const CoursesRoute = {
   pathname: '/course',
   meta: {
     title: '课程达成度',
     icon: 'apple'
   },
+  // eslint-disable-next-line react/display-name
   component: () => <SwitchRoute routes={CoursesRoute} />,
   redirect: '/course/manage',
   children: [
@@ -67,7 +65,7 @@ export const CoursesRoute = {
         title: '课程管理',
         icon: 'dingding'
       },
-      component: Loadable('Course/Manage'),
+      component: Loadable('Course/Manage')
     },
     {
       pathname: '/course/target',
@@ -75,7 +73,7 @@ export const CoursesRoute = {
         title: '课程目标达成度',
         icon: 'twitter'
       },
-      component: Loadable('Course/Target'),
+      component: Loadable('Course/Target')
     }
   ]
 }
@@ -86,6 +84,7 @@ export const SetRoute = {
     title: '毕业目标设置',
     icon: 'windows'
   },
+
   component: () => <SwitchRoute routes={SetRoute} />,
   redirect: '/set/need',
   children: [
@@ -95,7 +94,7 @@ export const SetRoute = {
         title: '毕业要求',
         icon: 'weibo-square'
       },
-      component: Loadable('Set/Need'),
+      component: Loadable('Set/Need')
     },
     {
       pathname: '/set/line',
@@ -103,7 +102,7 @@ export const SetRoute = {
         title: '毕业目标达标线',
         icon: 'wechat'
       },
-      component: Loadable('Set/Line'),
+      component: Loadable('Set/Line')
     },
     {
       pathname: '/set/project',
@@ -111,7 +110,7 @@ export const SetRoute = {
         title: '专业培养方案',
         icon: 'medium-workmark'
       },
-      component: Loadable('Set/Project'),
+      component: Loadable('Set/Project')
     },
     {
       pathname: '/set/support',
@@ -119,7 +118,7 @@ export const SetRoute = {
         title: '专业支撑点',
         icon: 'facebook'
       },
-      component: Loadable('Set/Support'),
+      component: Loadable('Set/Support')
     },
     {
       pathname: '/set/outline',
@@ -127,7 +126,7 @@ export const SetRoute = {
         title: '课程大纲',
         icon: 'alipay'
       },
-      component: Loadable('Set/OutLine'),
+      component: Loadable('Set/OutLine')
     },
     {
       pathname: '/set/table',
@@ -135,7 +134,7 @@ export const SetRoute = {
         title: '实现矩阵详表',
         icon: 'alipay'
       },
-      component: Loadable('Set/Table'),
+      component: Loadable('Set/Table')
     },
     {
       pathname: '/set/share',
@@ -143,7 +142,7 @@ export const SetRoute = {
         title: '课程分配',
         icon: 'slack-square'
       },
-      component: Loadable('Set/Share'),
+      component: Loadable('Set/Share')
     },
     {
       pathname: '/set/manage',
@@ -151,8 +150,8 @@ export const SetRoute = {
         title: '课程大纲',
         icon: 'yuque'
       },
-      component: Loadable('Set/Manage'),
-    },
+      component: Loadable('Set/Manage')
+    }
   ]
 }
 export const DicRoute = {
@@ -170,7 +169,7 @@ export const DicRoute = {
         title: '学院',
         icon: 'weibo-circle'
       },
-      component: Loadable('Dictionary/College'),
+      component: Loadable('Dictionary/College')
     },
     {
       pathname: '/dictionary/department',
@@ -178,7 +177,7 @@ export const DicRoute = {
         title: '系',
         icon: 'youtube'
       },
-      component: Loadable('Dictionary/Department'),
+      component: Loadable('Dictionary/Department')
     },
     {
       pathname: '/dictionary/major',
@@ -186,7 +185,7 @@ export const DicRoute = {
         title: '专业',
         icon: 'gitlab'
       },
-      component: Loadable('Dictionary/Major'),
+      component: Loadable('Dictionary/Major')
     },
     {
       pathname: '/dictionary/classes',
@@ -194,7 +193,7 @@ export const DicRoute = {
         title: '专业班级',
         icon: 'codepen'
       },
-      component: Loadable('Dictionary/Classes'),
+      component: Loadable('Dictionary/Classes')
     },
     {
       pathname: '/dictionary/term',
@@ -202,7 +201,7 @@ export const DicRoute = {
         title: '学期',
         icon: 'behance'
       },
-      component: Loadable('Dictionary/Term'),
+      component: Loadable('Dictionary/Term')
     },
     {
       pathname: '/dictionary/courses',
@@ -210,8 +209,8 @@ export const DicRoute = {
         title: '课程类别',
         icon: 'ant-design'
       },
-      component: Loadable('Dictionary/Courses'),
-    },
+      component: Loadable('Dictionary/Courses')
+    }
 
   ]
 }
@@ -230,7 +229,7 @@ export const ManageRoute = {
         title: '课程管理',
         icon: 'taobao-circle'
       },
-      component: Loadable('Manage/Course'),
+      component: Loadable('Manage/Course')
     },
     {
       pathname: '/manage/teacher',
@@ -238,7 +237,7 @@ export const ManageRoute = {
         title: '教师管理',
         icon: 'medium'
       },
-      component: Loadable('Manage/Teacher'),
+      component: Loadable('Manage/Teacher')
     },
     {
       pathname: '/manage/student',
@@ -246,8 +245,8 @@ export const ManageRoute = {
         title: '学生管理',
         icon: 'code-sandbox'
       },
-      component: Loadable('Manage/Student'),
-    },
+      component: Loadable('Manage/Student')
+    }
   ]
 }
 
@@ -257,24 +256,46 @@ export const OtherRoute = {
     title: '上传记录',
     icon: 'chrome'
   },
-  component: Loadable('Other/Record'),
-  // component: () => <SwitchRoute routes={ManageRoute} />,
-  // redirect: '/manage/course',
-  // children: [
-  //   {
-  //     pathname: '/manage/course',
-  //     meta: {
-  //       title: '课程管理',
-  //       icon: 'taobao-circle'
-  //     },
-  //     component: Loadable('Manage/Course'),
-  //   },
+  component: () => <SwitchRoute routes={OtherRoute} />,
+  redirect: '/record/index',
+  // component: Loadable('Other/Record')
 
-  // ]
+  children: [
+    {
+      pathname: '/record/index',
+      meta: {
+        title: '课程管理',
+        icon: 'taobao-circle'
+      },
+      component: Loadable('Other/Record')
+    },
+    {
+      pathname: '/record/redux',
+      meta: {
+        title: 'redux async 练习',
+        icon: 'code-sandbox'
+      },
+      component: Loadable('Other/Redux')
+    },
+    {
+      pathname: '/record/mobx',
+      meta: {
+        title: 'Mobx练习',
+        icon: 'code-sandbox'
+      },
+      component: Loadable('Other/Mobx')
+    },
+    {
+      pathname: '/record/mobx-test',
+      meta: {
+        title: 'Mobx练习2',
+        icon: 'code-sandbox'
+      },
+      component: Loadable('Other/Mobx2')
+    }
+
+  ]
 }
-
-
-
 
 export const navRoutes = [
   HomeRoute,
@@ -284,6 +305,4 @@ export const navRoutes = [
   ManageRoute,
   OtherRoute
 ]
-
-
 

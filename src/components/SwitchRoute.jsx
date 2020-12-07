@@ -11,7 +11,7 @@ function SwitchRoute({ routes }) {
           path={route.pathname}
           key={route.pathname}
           component={route.component}
-          
+
         ></Route>
       ))}
       <Redirect from={routes.pathname} to={routes.redirect}></Redirect>

@@ -12,7 +12,6 @@ class BaseRoute extends Component {
   }
 
   render() {
-    console.log("test")
     console.log("%c只是个 首页路由页面", "color: white;font-size:20px; font-style: italic; background-color: red;padding: 2px")
     return (
       <Switch >

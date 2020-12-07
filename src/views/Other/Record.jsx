@@ -98,12 +98,13 @@ class Record extends BaseState {
     const { scroll, search_params, loading } = this.state;
     const { lists, page, teachers } = this.props;
     return (
-      <div ref="need">
+      // eslint-disable-next-line react/no-string-refs
+      <div ref='need'>
         <ContentTitle title={"上传记录"} />
-        <div className="content-search">
+        <div className='content-search'>
           <BaseSelect
             style={{}}
-            placeholder="上传"
+            placeholder='上传'
             setParams={this.setParams}
             config={{
               key: "type",
@@ -113,7 +114,7 @@ class Record extends BaseState {
             isMore
           ></BaseSelect>
           <BaseSelect
-            placeholder="教师"
+            placeholder='教师'
             setParams={this.setParams}
             config={{
               key: "teacher_id",
@@ -124,7 +125,7 @@ class Record extends BaseState {
             options={teachers.lists}
             getMore={this.getMoreList}
           />
-          <div className="ml20">
+          <div className='ml20'>
             <RangePicker
               value={[
                 search_params.start_at ? moment(search_params.start_at) : null,
@@ -133,10 +134,10 @@ class Record extends BaseState {
               onChange={this.changeRange}
             />
           </div>
-          <Button className="ml20" type="primary" onClick={this.confirm}>
+          <Button className='ml20' type='primary' onClick={this.confirm}>
             确认
           </Button>
-          <Button className="ml20" type="primary" onClick={this.reset}>
+          <Button className='ml20' type='primary' onClick={this.reset}>
             重置
           </Button>
         </div>
@@ -146,11 +147,11 @@ class Record extends BaseState {
             backgroundColor: "#fff",
             maxHeight: scroll.y + "px"
           }}
-          rowKey="id"
+          rowKey='id'
           loading={loading}
           scroll={scroll}
           dataSource={lists}
-          size="middle"
+          size='middle'
           pagination={false}
           bordered
           columns={tableCols}

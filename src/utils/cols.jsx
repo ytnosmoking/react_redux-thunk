@@ -128,8 +128,6 @@ export const role = (config = {}) => ({
   ...config
 })
 
-
-
 // 达成度统计-毕业要求
 export const HomeNeedCols = [
   enter_year({ fixed, width }),
@@ -187,7 +185,7 @@ export const HomeSupportCols = [
   {
     ...major(), render: info => (
       <span>{info.title}</span>
-    ),
+    )
   },
   support(),
   achivement({
@@ -234,7 +232,7 @@ export const HomeCourseCols = [
   })
 ]
 
-// 课程达成度 
+// 课程达成度
 export const CourseManageCols = [
   terms({
     render: (txt, record) => (
@@ -276,7 +274,7 @@ export const CourseManageCols = [
         <span style={{ color: record.is_exam_result_set ? '#1890ff' : '' }}>{record.is_exam_result_set ? '已' : '未'}上传</span>
       )
     }
-  ),
+  )
 
 ]
 export const courseManageScoreCols = [
@@ -292,7 +290,7 @@ export const courseTargetCols = [
   course_no(),
   courses({ title: '课程', dataIndex: 'course', key: 'course' }),
   teacher(),
-  score({ title: '课程目标平均值' }),
+  score({ title: '课程目标平均值' })
 ]
 
 export const setNeedCols = [
@@ -305,7 +303,7 @@ export const setLineCols = [
   department(),
   major(),
   score({
-    title: '达成度最低指标',
+    title: '达成度最低指标'
   })
 ]
 
@@ -316,7 +314,7 @@ export const setProjectCols = [
     render: (txt, record) => (
       <span>{txt.title}</span>
     )
-  }),
+  })
 ]
 export const setProjectInfoCols = [
   course_type(),
@@ -393,7 +391,7 @@ export const setManage = [
         <div key={index}>{item}</div>
       ))
     )
-  }),
+  })
 ]
 
 export const dicCollege = [
@@ -423,7 +421,7 @@ export const dicClasses = [
   classes(),
   enter_year({
     defaultSortOrder: 'descend',
-    sorter: (a, b) => a.enter_year - b.enter_year,
+    sorter: (a, b) => a.enter_year - b.enter_year
   }),
   create_time()
 ]
@@ -467,29 +465,29 @@ export const manageStudent = [
   number({ title: '学号' }),
   name(),
   name({
-    title: '性别', dataIndex: 'sex', key: 'sex',
-  }),
+    title: '性别', dataIndex: 'sex', key: 'sex'
+  })
 ]
 
 export const recordUpload = [
   name({ title: 'id', dataIndex: 'id', key: 'id', width: 100 }),
   number({ title: '教师编号' }),
   name({ title: '教师姓名' }),
-  role({ title: '身份', render:txt=>filterRole(txt)}),
+  role({ title: '身份', render: txt => filterRole(txt) }),
   content({ title: '具体负责', dataIndex: 'work', key: 'work' }),
   create_time({ title: '上传时间', dataIndex: 'updated_at', key: 'updated_at' }),
   name({ title: '上传行数', dataIndex: 'lines', key: 'lines' }),
   name({ title: '已处理行数', dataIndex: 'done', key: 'done' }),
   name({ title: '成功行数', dataIndex: 'success', key: 'success' }),
   name({ title: '失败行数', dataIndex: 'fail', key: 'fail' }),
-  name({ 
-        title: '失败内容',
-        dataIndex: 'errors',
-        key: 'errors',
-        width: 400,
-        render:(txt)=>(
-          (txt&&txt.length)?txt.map((item,index)=>(
-            <div key={index}>{item}</div>
-          )):'')
-      }),
+  name({
+    title: '失败内容',
+    dataIndex: 'errors',
+    key: 'errors',
+    width: 400,
+    render: (txt) => (
+      (txt && txt.length) ? txt.map((item, index) => (
+        <div key={index}>{item}</div>
+      )) : '')
+  })
 ]

@@ -1,46 +1,47 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Route, Link } from "react-router-dom";
-import ContentTitle from "component/ContentTitle";
-import BasePagination from "component/BasePagination";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Route, Link } from 'react-router-dom';
+import ContentTitle from 'component/ContentTitle';
+import BasePagination from 'component/BasePagination';
 
-import ManageOutLine from "./ManageOutLine";
-import ManageSet from "./ManageSet";
-import ManageScore from "./ManageScore";
+import ManageOutLine from './ManageOutLine';
+import ManageSet from './ManageSet';
+import ManageScore from './ManageScore';
 
-import { Table, Button } from "antd";
-import { CourseManageCols, operation } from "utils/cols";
-import { HomeState } from "utils/extends";
-import { getCourseManage as getList } from "store/async";
+import { Table, Button } from 'antd';
+import { CourseManageCols, operation } from 'utils/cols';
+import { HomeState } from 'utils/extends';
+import { getCourseManage as getList } from 'store/async';
 const routes = [
   {
-    name: "outLine",
-    txt: "查看大纲",
-    component: ManageOutLine,
+    name: 'outLine',
+    txt: '查看大纲',
+    component: ManageOutLine
   },
   {
-    name: "set",
-    txt: "考核设置",
-    component: ManageSet,
+    name: 'set',
+    txt: '考核设置',
+    component: ManageSet
   },
   {
-    name: "score",
-    txt: "上传成绩",
-    component: ManageScore,
-  },
+    name: 'score',
+    txt: '上传成绩',
+    component: ManageScore
+  }
 ];
 const tableCols = [
   ...CourseManageCols,
   operation({
     width: 260,
-    fixed: "right",
+    fixed: 'right',
+    // eslint-disable-next-line react/display-name
     render: (txt, record) => (
       <div>
         {routes.map((route, index) => (
           <Button
-            type="primary"
-            size="small"
-            className={index ? "ml10" : ""}
+            type='primary'
+            size='small'
+            className={index ? 'ml10' : ''}
             key={route.name}
           >
             <Link
@@ -49,8 +50,8 @@ const tableCols = [
                 state: {
                   id: record.id,
                   title: route.txt,
-                  h3: record.term.title + "-" + record.course.title,
-                },
+                  h3: record.term.title + '-' + record.course.title
+                }
               }}
             >
               {route.txt}
@@ -58,15 +59,15 @@ const tableCols = [
           </Button>
         ))}
       </div>
-    ),
-  }),
+    )
+  })
 ];
 @connect(
   (state) => ({
-    ...state.course.manage,
+    ...state.course.manage
   }),
   {
-    getList,
+    getList
   }
 )
 class Manage extends HomeState {
@@ -81,20 +82,20 @@ class Manage extends HomeState {
     this.setState({
       scroll: {
         x: 1600,
-        y: ycal,
-      },
+        y: ycal
+      }
     });
     this.getList();
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
-      loading: false,
+      loading: false
     });
   }
   getList = (params) => {
     const { page, page_size } = this.props.page;
     this.setState({
-      loading: true,
+      loading: true
     });
     this.props.getList({ page, page_size, ...params });
   };
@@ -104,18 +105,18 @@ class Manage extends HomeState {
     const { lists, page } = this.props;
 
     return (
-      <div ref="need">
-        <ContentTitle title={(state && state.title) || ""} />
+      <div ref='need'>
+        <ContentTitle title={(state && state.title) || ''} />
         <Table
           style={{
             marginTop: 20,
-            backgroundColor: "#fff",
-            maxHeight: scroll.y + "px",
+            backgroundColor: '#fff',
+            maxHeight: scroll.y + 'px'
           }}
           loading={loading}
           scroll={scroll}
           dataSource={lists}
-          size="middle"
+          size='middle'
           pagination={false}
           bordered
           columns={tableCols}

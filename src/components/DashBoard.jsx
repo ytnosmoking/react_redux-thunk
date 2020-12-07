@@ -12,7 +12,7 @@ import "./dashboard.less";
 const { Header, Sider, Content } = Layout;
 @connect(
   (state) => ({
-    historyRoutes: state.history,
+    historyRoutes: state.history
   }),
   { logout: createAction(ACTION.LOGOUT) }
 )
@@ -20,28 +20,30 @@ class DashBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showSide: true,
+      showSide: true
     };
   }
   exitSys = () => {
+    // eslint-disable-next-line react/prop-types
     this.props.logout();
+    // eslint-disable-next-line react/prop-types
     this.props.history.push({ pathname: "/login" });
   };
   toggle = () => {
     this.setState({
-      showSide: !this.state.showSide,
+      showSide: !this.state.showSide
     });
   };
   render() {
     console.log(`--------------this is DashBoard--------------`);
     return (
-      <Layout className="baseLayout">
+      <Layout className='baseLayout'>
         <Sider
           collapsed={!this.state.showSide}
           style={{
-            overflow: "auto",
+            overflow: "auto"
           }}
-          width="220"
+          width='220'
         >
           <SiderMenu></SiderMenu>
         </Sider>

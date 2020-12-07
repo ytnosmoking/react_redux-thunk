@@ -69,14 +69,14 @@ class ManageScore extends HomeState {
     const { lists, page } = this.props;
 
     return (
-      <div ref="need" className="secondDiv animated slideInRight">
+      <div ref='need' className='secondDiv animated slideInRight'>
         <ContentTitle
           title={(state && state.title) || ""}
           txt={<div style={{ fontSize: 20 }}>{state.h3}</div>}
           btn={
             <div>
-              <Button type="primary">批量导入</Button>
-              <Button type="primary" className="ml20">
+              <Button type='primary'>批量导入</Button>
+              <Button type='primary' className='ml20'>
                 新增
               </Button>
             </div>
@@ -91,7 +91,7 @@ class ManageScore extends HomeState {
           loading={loading}
           scroll={scroll}
           dataSource={lists}
-          size="middle"
+          size='middle'
           pagination={false}
           bordered
           columns={tableCols}

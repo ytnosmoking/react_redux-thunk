@@ -27,6 +27,7 @@ module.exports = {
         "react"
     ],
     "rules": {
+        'react/prop-types': 0,
         'accessor-pairs': 2,
         'arrow-spacing': [2, {
             'before': true,

@@ -5,8 +5,9 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ConfigProvider } from "antd";
 import store from "./store";
+// import 'antd/dist/antd.css'
+// import "animate.css";
 import zhCN from "antd/es/locale/zh_CN";
-import "animate.css";
 import { isDev } from "utils/config";
 
 import App from "./App";
@@ -18,6 +19,7 @@ const Router = BrowserRouter;
 ReactDOM.render(<Provider store={store}>
   <Router>
     <ConfigProvider locale={zhCN}>
+      {/* <ConfigProvider > */}
       <App />
     </ConfigProvider>
   </Router>
@@ -29,7 +31,8 @@ ReactDOM.render(<Provider store={store}>
 if (isDev) {
   serviceWorker.unregister();
 } else {
-  serviceWorker.register();
+  serviceWorker.unregister();
+  // serviceWorker.register();
 
   //   let BUCKET_CURRENT = 'cache-v2'
   // // 请求拦截
